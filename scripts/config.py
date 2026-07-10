@@ -1,6 +1,8 @@
 from pathlib import Path
 import torch
+
 PROJECT_NAME = "Fashion_Project"
+
 # Project root
 ROOT = Path(__file__).resolve().parent.parent
 
@@ -14,9 +16,11 @@ OUTPUT_DIR = DATA_DIR / "output"
 COLOR_CROPS_DIR = DATA_DIR / "color_crops"
 CROPS_DIR = DATA_DIR / "crops"
 
+TICKETS_DIR = DATA_DIR / "tickets"
+OCR_OUTPUT = OUTPUT_DIR / "ocr.json"
+
 WARDROBE_FILE = DATA_DIR / "wardrobe.json"
 COLORS_FILE = DATA_DIR / "colors.json"
 
 # Device
 DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
-
