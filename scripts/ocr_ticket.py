@@ -67,21 +67,38 @@ print(full_text)
 prompt = f"""
 You are an AI information extraction system.
 
-Your task is to extract structured information from flight ticket OCR.
+Extract the travel details from this airline ticket.
+
+IMPORTANT RULES
+
+- Return CITY names, NOT airport codes.
+- Example:
+    Origin: Mumbai
+    Destination: North Goa
+
+- Never return airport codes like:
+  BOM
+  GOX
+  DEL
+  BLR
+  HYD
+  MAA
+  CCU
+
+- Ignore passenger names.
+- Ignore PNR.
+- Ignore booking reference.
+- Ignore barcode.
+- Ignore payment status.
 
 Return ONLY valid JSON.
-
-Do NOT explain.
-Do NOT think.
-Do NOT use markdown.
-Do NOT return anything except JSON.
 
 Schema:
 
 {{
-    "origin": null,
-    "destination": null,
-    "travel_date": null
+    "origin": "",
+    "destination": "",
+    "travel_date": ""
 }}
 
 OCR TEXT:
@@ -129,7 +146,6 @@ trip_info = {
 
 try:
 
-    # Remove <think>...</think> if present
     cleaned = re.sub(
         r"<think>.*?</think>",
         "",
@@ -160,7 +176,7 @@ except Exception as e:
 if not trip_info.get("travel_date"):
 
     match = re.search(
-        r"\b(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),?\s+\d{1,2}\s+[A-Za-z]{3}\s+\d{4}",
+        r"\b\d{1,2}\s+[A-Za-z]{3}\s+\d{4}\b",
         full_text
     )
 
@@ -177,7 +193,8 @@ with open(OCR_OUTPUT, "w", encoding="utf-8") as f:
     json.dump(
         trip_info,
         f,
-        indent=4
+        indent=4,
+        ensure_ascii=False
     )
 
 # ==================================================
