@@ -6,10 +6,12 @@ __pycache__/
 *.pyo
 *.pyd
 *.so
-*.egg-info/
 *.egg
+*.egg-info/
 
-# Virtual environments
+# ==================================================
+# Virtual Environments
+# ==================================================
 .venv/
 venv/
 env/
@@ -39,19 +41,21 @@ desktop.ini
 .ipynb_checkpoints/
 
 # ==================================================
+# Generated Project Outputs
+# ==================================================
+data/output/
+data/crops/
+data/color_crops/
+
+# Generated JSON files
+data/owlvit.json
+data/colors.json
+data/wardrobe.json
+
+# ==================================================
 # YOLO / Ultralytics Outputs
 # ==================================================
 runs/
-
-# ==================================================
-# Generated Project Files
-# ==================================================
-data/color_crops/
-data/crops/
-data/output/
-
-data/colors.json
-data/wardrobe.json
 
 # ==================================================
 # Large Datasets
@@ -61,20 +65,14 @@ datasets/
 # ==================================================
 # Model Weights
 # ==================================================
-models/
-*.pt
-*.onnx
-*.engine
-*.tflite
+models/*.pt
+models/*.pth
+models/*.onnx
+models/*.engine
+models/*.tflite
 
 # ==================================================
-# Temporary Files
-# ==================================================
-*.tmp
-*.temp
-
-# ==================================================
-# Python Cache
+# Python Caches
 # ==================================================
 .pytest_cache/
 .mypy_cache/
@@ -92,7 +90,9 @@ dist/
 .env.*
 
 # ==================================================
-# Miscellaneous
+# Temporary Files
 # ==================================================
+*.tmp
+*.temp
 *.bak
 *.swp
