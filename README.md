@@ -1,48 +1,62 @@
 # 👗 Jio Lookbook
 
-An AI-powered wardrobe assistant that builds a private wardrobe database from clothing photos using YOLO object detection and color extraction.
+An AI-powered wardrobe assistant that understands a user's travel plans and wardrobe to recommend suitable outfits while preserving privacy.
 
-This project is part of an AI internship focused on creating an intelligent wardrobe recommendation system that can eventually integrate with JioCloud and provide outfit recommendations based on travel context.
+The project builds a private wardrobe database from clothing photos using **OWL-ViT**, extracts structured travel information from flight tickets using **EasyOCR + Ollama (Qwen)**, and lays the foundation for a privacy-preserving outfit recommendation system.
+
+This project is being developed as part of an AI internship focused on combining computer vision, OCR, and recommendation systems with JioCloud.
 
 ---
 
 # Features
 
-- Clothing detection using YOLO
-- Dominant color extraction using OpenCV (HSV)
-- Wardrobe database generation (JSON)
-- Dataset merging from multiple Roboflow datasets
-- Dataset verification with bounding boxes
-- GPU-ready configuration (CUDA support)
-- Portable project structure using centralized configuration
+- ✈️ Flight ticket OCR using EasyOCR
+- 🧠 Structured trip information extraction using Ollama (Qwen)
+- 👕 Zero-shot clothing detection using OWL-ViT
+- 🎨 Clothing color extraction using OpenCV (HSV)
+- 👗 Private wardrobe database generation
+- 📦 Dataset merging from multiple Roboflow datasets
+- ✅ Dataset verification utilities
+- 🚀 GPU-ready project structure
+- 🔒 Privacy-first recommendation pipeline
+- 🔄 Optional OWL-ViT → YOLO annotation workflow for future training
 
 ---
 
 # Project Structure
 
-```
+```text
 Jio_Lookbook
 │
 ├── data
-│   ├── photos
-│   ├── color_crops
-│   ├── crops
-│   ├── output
+│   ├── photos/
+│   ├── tickets/
+│   ├── crops/
+│   ├── color_crops/
+│   ├── output/
+│   │    ├── ocr.json
+│   │    └── owlvit.json
 │   ├── colors.json
 │   └── wardrobe.json
 │
-├── datasets
+├── datasets/
 │
-├── models
+├── models/
 │
 ├── scripts
-│   ├── build_wardrobe.py
-│   ├── color_detection_lab.py
 │   ├── config.py
-│   ├── demo.py
-│   ├── extract_colors.py
+│   │
 │   ├── merge_datasets.py
-│   └── verify_samples.py
+│   ├── verify_samples.py
+│   │
+│   ├── ocr_ticket.py
+│   ├── owlvit_detect.py
+│   ├── crop_detections.py
+│   ├── extract_colors_owlvit.py
+│   ├── build_wardrobe_owlvit.py
+│   │
+│   ├── build_wardrobe_yolo.py
+│   └── demo.py
 │
 ├── requirements.txt
 ├── README.md
@@ -54,11 +68,16 @@ Jio_Lookbook
 # Technologies Used
 
 - Python
+- EasyOCR
+- Ollama
+- Qwen 3
+- OWL-ViT
+- Hugging Face Transformers
 - Ultralytics YOLO
 - OpenCV
 - PyTorch
-- NumPy
 - Pillow
+- NumPy
 - PyYAML
 
 ---
@@ -98,63 +117,168 @@ python scripts/verify_samples.py
 
 ---
 
-## 3. Detect clothing and build wardrobe
+## 3. Read travel ticket
 
 ```bash
-python scripts/build_wardrobe.py
+python scripts/ocr_ticket.py
+```
+
+Outputs
+
+```text
+data/output/ocr.json
 ```
 
 ---
 
-## 4. Detect colors only
+## 4. Detect clothing using OWL-ViT
 
 ```bash
-python scripts/extract_colors.py
+python scripts/owlvit_detect.py
+```
+
+Outputs
+
+```text
+data/output/owlvit.json
 ```
 
 ---
 
-## 5. View wardrobe database
+## 5. Crop detected clothing
 
 ```bash
-python scripts/demo.py
+python scripts/crop_detections.py
+```
+
+Outputs
+
+```text
+data/crops/
+```
+
+---
+
+## 6. Extract clothing colors
+
+```bash
+python scripts/extract_colors_owlvit.py
+```
+
+Outputs
+
+```text
+data/colors.json
+```
+
+---
+
+## 7. Build wardrobe database
+
+```bash
+python scripts/build_wardrobe_owlvit.py
+```
+
+Outputs
+
+```text
+data/wardrobe.json
 ```
 
 ---
 
 # Sample Output
 
-```
-========== MY WARDROBE ==========
+Example `wardrobe.json`
 
-Image      : shirt_01.jpg
-Category   : Tshirt
-Color      : Sky Blue
-Confidence : 0.989
+```json
+[
+    {
+        "image": "shirt1.jpg",
+        "category": "shirt",
+        "color": "Sky Blue",
+        "confidence": 0.98
+    },
+    {
+        "image": "jeans1.jpg",
+        "category": "jeans",
+        "color": "Black",
+        "confidence": 0.95
+    }
+]
 ```
 
 ---
 
 # Current Pipeline
 
+```text
+                 Flight Ticket
+                       │
+                       ▼
+                  EasyOCR
+                       │
+                       ▼
+                Ollama (Qwen)
+                       │
+                       ▼
+                  ocr.json
+
+
+              Wardrobe Photos
+                       │
+                       ▼
+                  OWL-ViT
+                       │
+                       ▼
+                 owlvit.json
+                       │
+                       ▼
+               Crop Detections
+                       │
+                       ▼
+              Color Extraction
+                       │
+                       ▼
+                 colors.json
+                       │
+                       ▼
+              Wardrobe Builder
+                       │
+                       ▼
+                wardrobe.json
+                       │
+                       ▼
+          Recommendation Engine (In Progress)
 ```
-Input Images
-      │
-      ▼
-YOLO Detection
-      │
-      ▼
-Crop Clothing
-      │
-      ▼
-Color Detection
-      │
-      ▼
-Wardrobe JSON
-      │
-      ▼
-Recommendation Engine (Future)
+
+---
+
+# Privacy-Preserving Recommendation Flow
+
+The recommendation system is designed so that user photos never leave the local device.
+
+Only wardrobe metadata such as:
+
+```text
+Category
+Color
 ```
+
+is used to query the recommendation engine.
+
+Example:
+
+```text
+Need:
+Blue Jeans
+White Shirt
+
+NOT:
+User Photos
+```
+
+This aligns with the internship requirement of preserving user privacy while enabling personalized recommendations.
 
 ---
 
@@ -162,33 +286,47 @@ Recommendation Engine (Future)
 
 ✅ Dataset merging
 
-✅ Clothing detection
+✅ Dataset verification
 
-✅ Color extraction
+✅ OCR pipeline
 
-✅ Wardrobe JSON generation
+✅ Flight ticket information extraction
+
+✅ OWL-ViT clothing detection
+
+✅ Clothing cropping
+
+✅ Clothing color extraction
+
+✅ Private wardrobe database generation
 
 ✅ GPU-ready project structure
 
-🚧 Outfit recommendation engine
+🚧 Trip context understanding
 
-🚧 Travel context detection
+🚧 Mock AJIO catalog integration
+
+🚧 Recommendation engine
 
 🚧 JioCloud integration
 
-🚧 OCR for travel tickets
+🚧 OWL-ViT → YOLO annotation export
+
+🚧 YOLO retraining from reviewed annotations
 
 ---
 
 # Future Work
 
-- Detect travel destination using OCR
-- Integrate JioCloud APIs
-- Outfit recommendation engine
+- Detect trip type (Beach, Business, Wedding, etc.)
+- Generate outfit recommendations based on trip context
+- Match wardrobe with a mock AJIO catalog
+- Export reviewed OWL-ViT detections to YOLO format
+- Retrain YOLO on reviewed annotations
+- Integrate with JioCloud APIs
+- Weather-aware outfit recommendations
 - Similar clothing search
 - Color harmony recommendations
-- Weather-aware outfit suggestions
-- Fine-tune YOLO on larger fashion datasets
 
 ---
 
@@ -196,6 +334,8 @@ Recommendation Engine (Future)
 
 **Vedeka Vaswani**
 
-Artificial Intelligence & Data Science Engineering
+B.E. Artificial Intelligence & Data Science
 
 GitHub: https://github.com/vedeka14
+
+---
