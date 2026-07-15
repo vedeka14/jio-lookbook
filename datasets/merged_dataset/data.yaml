@@ -1,0 +1,32 @@
+path: C:\Users\Vedeka\Downloads\Fashion_Project\datasets\merged_dataset
+train: train/images
+val: valid/images
+test: test/images
+nc: 26
+names:
+  0: Churidaar
+  1: Dhoti
+  2: Hijab
+  3: Jeans
+  4: Maxi
+  5: Pant
+  6: Saree
+  7: Shorts
+  8: Tshirt
+  9: Kurta
+  10: Shirt
+  11: Jacket
+  12: Dress
+  13: Skirt
+  14: Dupatta
+  15: Kameez
+  16: Shalwar
+  17: Design Sherwani
+  18: Plain Sherwani
+  19: Lehenga
+  20: Anarkali
+  21: Sharara
+  22: Lungi
+  23: Handbag
+  24: Shoes
+  25: Hoodie

@@ -1,5 +1,6 @@
 import json
 import re
+
 import easyocr
 from ollama import chat
 
@@ -65,43 +66,89 @@ print(full_text)
 # ==================================================
 
 prompt = f"""
-You are an AI information extraction system.
+You are an intelligent travel document information extraction assistant.
 
-Extract the travel details from this airline ticket.
+Your task is to read OCR text extracted from an airline ticket.
+
+Extract the travel information and infer the travel context.
 
 IMPORTANT RULES
 
-- Return CITY names, NOT airport codes.
-- Example:
-    Origin: Mumbai
-    Destination: North Goa
+1. Return CITY names, NOT airport codes.
 
-- Never return airport codes like:
-  BOM
-  GOX
-  DEL
-  BLR
-  HYD
-  MAA
-  CCU
+Correct examples:
 
-- Ignore passenger names.
-- Ignore PNR.
-- Ignore booking reference.
-- Ignore barcode.
-- Ignore payment status.
+Origin: Mumbai
+Destination: Goa
 
-Return ONLY valid JSON.
+Never return:
+
+BOM
+GOX
+GOI
+DEL
+BLR
+HYD
+MAA
+CCU
+
+2. Infer the trip type.
+
+Examples
+
+Destination: Goa
+Trip: Beach
+Weather: Hot Weather
+
+Destination: North Goa
+Trip: Beach
+Weather: Hot Weather
+
+Destination: Manali
+Trip: Mountain
+Weather: Cold Weather
+
+Destination: Shimla
+Trip: Hill Station
+Weather: Cold Weather
+
+Destination: Jaipur
+Trip: City
+Weather: Hot Weather
+
+Destination: Mumbai
+Trip: City
+Weather: Humid
+
+3. Ignore
+
+- Passenger name
+- Booking reference
+- PNR
+- Payment status
+- Seat
+- Barcode
+- Airline status
+
+4. Return ONLY valid JSON.
 
 Schema:
 
 {{
     "origin": "",
     "destination": "",
+    "trip": "",
+    "weather": "",
     "travel_date": ""
 }}
 
-OCR TEXT:
+If you cannot determine the trip or weather, return
+
+"trip":"Unknown"
+
+"weather":"Unknown"
+
+OCR TEXT
 
 {full_text}
 """
@@ -141,6 +188,8 @@ print(llm_output)
 trip_info = {
     "origin": None,
     "destination": None,
+    "trip": None,
+    "weather": None,
     "travel_date": None
 }
 
@@ -190,6 +239,7 @@ if not trip_info.get("travel_date"):
 OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 
 with open(OCR_OUTPUT, "w", encoding="utf-8") as f:
+
     json.dump(
         trip_info,
         f,

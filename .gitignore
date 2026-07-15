@@ -47,7 +47,7 @@ data/output/
 data/crops/
 data/color_crops/
 
-# Generated JSON files
+# Generated JSON Files
 data/owlvit.json
 data/colors.json
 data/wardrobe.json
@@ -58,9 +58,10 @@ data/wardrobe.json
 runs/
 
 # ==================================================
-# Large Datasets
+# Ignore Raw Datasets
 # ==================================================
-datasets/
+datasets/Fashion_Datasets/
+datasets/Fashion_Merged/
 
 # ==================================================
 # Model Weights
