@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['jeans']
+
+roboflow:
+  workspace: object-detection-l7hk4
+  project: talov-jeans
+  version: 2
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/object-detection-l7hk4/talov-jeans/dataset/2

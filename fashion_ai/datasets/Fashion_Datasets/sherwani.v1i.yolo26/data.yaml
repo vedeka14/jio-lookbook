@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['Desgin sherwani', 'Plain kurta', 'Plain sherwani']
+
+roboflow:
+  workspace: rahil-mehta-0chuf
+  project: sherwani
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/rahil-mehta-0chuf/sherwani/dataset/1

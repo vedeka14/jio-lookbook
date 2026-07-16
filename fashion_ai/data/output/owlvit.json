@@ -1,0 +1,409 @@
+[
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000001.jpg",
+        "label": "dress",
+        "score": 0.8,
+        "bbox": [
+            277.42,
+            119.02,
+            537.26,
+            632.61
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000001.jpg",
+        "label": "shalwar",
+        "score": 0.49,
+        "bbox": [
+            312.47,
+            598.84,
+            511.32,
+            741.07
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
+        "label": "dupatta",
+        "score": 0.348,
+        "bbox": [
+            294.48,
+            140.58,
+            494.75,
+            571.39
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
+        "label": "saree",
+        "score": 0.706,
+        "bbox": [
+            289.61,
+            136.33,
+            491.77,
+            792.77
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
+        "label": "lungi",
+        "score": 0.291,
+        "bbox": [
+            437.95,
+            222.9,
+            498.88,
+            576.82
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
+        "label": "shalwar",
+        "score": 0.292,
+        "bbox": [
+            295.38,
+            289.91,
+            464.01,
+            793.29
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000009.jpg",
+        "label": "dress",
+        "score": 0.773,
+        "bbox": [
+            257.86,
+            93.34,
+            554.77,
+            613.21
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000009.jpg",
+        "label": "shalwar",
+        "score": 0.457,
+        "bbox": [
+            322.18,
+            437.53,
+            499.75,
+            706.69
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "shirt",
+        "score": 0.271,
+        "bbox": [
+            672.23,
+            250.32,
+            697.76,
+            341.32
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "kameez",
+        "score": 0.272,
+        "bbox": [
+            691.43,
+            256.12,
+            742.88,
+            487.35
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "kameez",
+        "score": 0.255,
+        "bbox": [
+            661.31,
+            251.08,
+            706.4,
+            483.19
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "dress",
+        "score": 0.46,
+        "bbox": [
+            78.45,
+            256.39,
+            189.22,
+            497.68
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "dress",
+        "score": 0.511,
+        "bbox": [
+            417.8,
+            276.7,
+            538.34,
+            508.17
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "handbag",
+        "score": 0.708,
+        "bbox": [
+            517.63,
+            419.42,
+            553.06,
+            492.44
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "sharara",
+        "score": 0.296,
+        "bbox": [
+            76.28,
+            258.92,
+            187.46,
+            594.45
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "skirt",
+        "score": 0.508,
+        "bbox": [
+            81.28,
+            490.76,
+            171.98,
+            592.01
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "label": "shoes",
+        "score": 0.254,
+        "bbox": [
+            79.54,
+            586.96,
+            105.58,
+            614.84
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
+        "label": "shirt",
+        "score": 0.315,
+        "bbox": [
+            595.24,
+            248.24,
+            620.92,
+            344.58
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
+        "label": "shirt",
+        "score": 0.252,
+        "bbox": [
+            611.55,
+            253.54,
+            642.51,
+            368.93
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
+        "label": "dress",
+        "score": 0.296,
+        "bbox": [
+            707.68,
+            227.76,
+            780.4,
+            468.11
+        ]
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
+        "label": "dress",
+        "score": 0.405,
+        "bbox": [
+            354.35,
+            274.01,
+            479.47,
+            511.94
+        ]
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000013.jpg",
+        "label": "dress",
+        "score": 0.636,
+        "bbox": [
+            5.29,
+            5.34,
+            634.83,
+            638.29
+        ]
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000018.jpg",
+        "label": "saree",
+        "score": 0.469,
+        "bbox": [
+            48.15,
+            3.47,
+            639.79,
+            638.41
+        ]
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000018.jpg",
+        "label": "shalwar",
+        "score": 0.272,
+        "bbox": [
+            92.82,
+            169.34,
+            637.66,
+            641.6
+        ]
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000019.jpg",
+        "label": "dress",
+        "score": 0.636,
+        "bbox": [
+            35.62,
+            3.14,
+            632.46,
+            633.58
+        ]
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000019.jpg",
+        "label": "dress",
+        "score": 0.355,
+        "bbox": [
+            46.2,
+            33.64,
+            633.77,
+            637.0
+        ]
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000022.jpg",
+        "label": "dress",
+        "score": 0.379,
+        "bbox": [
+            75.7,
+            94.59,
+            641.14,
+            630.29
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000013.jpg",
+        "label": "shirt",
+        "score": 0.252,
+        "bbox": [
+            213.38,
+            12.95,
+            415.73,
+            179.42
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000013.jpg",
+        "label": "shirt",
+        "score": 0.275,
+        "bbox": [
+            11.58,
+            15.54,
+            629.26,
+            629.76
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000014.jpg",
+        "label": "shirt",
+        "score": 0.407,
+        "bbox": [
+            142.43,
+            324.01,
+            455.92,
+            638.08
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
+        "label": "kurta",
+        "score": 0.296,
+        "bbox": [
+            151.98,
+            143.43,
+            284.97,
+            514.12
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
+        "label": "shirt",
+        "score": 0.274,
+        "bbox": [
+            420.43,
+            118.89,
+            531.12,
+            406.07
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
+        "label": "shorts",
+        "score": 0.498,
+        "bbox": [
+            365.71,
+            418.1,
+            445.54,
+            480.78
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
+        "label": "shorts",
+        "score": 0.514,
+        "bbox": [
+            75.72,
+            524.14,
+            170.13,
+            600.42
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000016.jpg",
+        "label": "shirt",
+        "score": 0.393,
+        "bbox": [
+            223.68,
+            131.06,
+            422.76,
+            456.8
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000016.jpg",
+        "label": "pants",
+        "score": 0.301,
+        "bbox": [
+            249.52,
+            415.17,
+            392.46,
+            636.7
+        ]
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000033.jpg",
+        "label": "shirt",
+        "score": 0.275,
+        "bbox": [
+            313.01,
+            143.68,
+            336.32,
+            169.52
+        ]
+    }
+]

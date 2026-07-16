@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['sarees']
+
+roboflow:
+  workspace: joel-jsxnd
+  project: saree-detection-0a50d
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/joel-jsxnd/saree-detection-0a50d/dataset/1

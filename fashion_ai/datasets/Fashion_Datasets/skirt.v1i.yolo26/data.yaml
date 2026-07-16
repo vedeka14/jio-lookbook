@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['skirt']
+
+roboflow:
+  workspace: practicas-6jgbv
+  project: skirt-jpsd2
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/practicas-6jgbv/skirt-jpsd2/dataset/1

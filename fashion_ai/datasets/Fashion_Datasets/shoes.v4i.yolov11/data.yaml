@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 6
+names: ['ankle', 'heel', 'left_foot', 'pinky', 'right_foot', 'toe']
+
+roboflow:
+  workspace: shoes-cygcx
+  project: shoes-4dc9e
+  version: 4
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/shoes-cygcx/shoes-4dc9e/dataset/4

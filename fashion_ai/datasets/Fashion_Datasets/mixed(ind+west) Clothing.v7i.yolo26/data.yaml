@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 11
+names: ['Churidaar', 'Dhoti', 'Hijab', 'Jeans', 'Maxi', 'Pant', 'Sari', 'Shorts', 'Tshirt', 'kurta', 'shirt']
+
+roboflow:
+  workspace: mainproject-r0w9e
+  project: clothing-00jh5
+  version: 7
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/mainproject-r0w9e/clothing-00jh5/dataset/7

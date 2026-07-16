@@ -1,0 +1,20 @@
+{
+    "origin": "Mumbai",
+    "destination": "Goa",
+    "travel_date": "25 Jul 2024",
+    "trip": "domestic",
+    "weather": "hot and humid",
+    "packing_style": "light clothing, breathable fabrics, sunscreen",
+    "activities": [
+        "beach relaxation",
+        "water sports",
+        "exploring historical forts",
+        "trying local cuisine"
+    ],
+    "recommendation_tags": [
+        "beach activities",
+        "cultural sightseeing",
+        "spicy food"
+    ],
+    "reasoning": "The trip is a domestic travel from Mumbai to Goa during summer (July), requiring packing for hot/humid weather. Activities focus on Goa's beaches, water sports, historical sites, and cuisine. Recommendations highlight relevant tags for the destination's key attractions."
+}

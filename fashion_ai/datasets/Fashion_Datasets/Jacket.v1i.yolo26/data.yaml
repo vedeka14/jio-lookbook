@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 1
+names: ['Jacket']
+
+roboflow:
+  workspace: atm
+  project: jacket-siqp3
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/atm/jacket-siqp3/dataset/1

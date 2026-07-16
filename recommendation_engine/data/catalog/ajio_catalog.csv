@@ -1,0 +1,101 @@
+product_id,category,color,price,product_name
+1,shirt,White,899,White Linen Shirt
+2,shirt,Blue,999,Oxford Blue Shirt
+3,shirt,Black,799,Casual Black Shirt
+4,shirt,Beige,1099,Beach Cotton Shirt
+5,shirt,Olive,1199,Olive Casual Shirt
+6,shirt,Sky Blue,1299,Sky Blue Formal Shirt
+7,shirt,Pink,999,Pink Oxford Shirt
+8,shirt,Grey,899,Grey Cotton Shirt
+9,shirt,Navy,1099,Navy Slim Shirt
+10,shirt,Green,1199,Forest Green Shirt
+11,shorts,Beige,699,Cotton Shorts
+12,shorts,Navy,899,Navy Beach Shorts
+13,shorts,Black,799,Black Casual Shorts
+14,shorts,Grey,749,Grey Sports Shorts
+15,shorts,Khaki,899,Khaki Chino Shorts
+16,shorts,White,699,White Linen Shorts
+17,pants,Khaki,1299,Slim Fit Chinos
+18,pants,Black,1499,Formal Trousers
+19,pants,Navy,1599,Navy Slim Pants
+20,pants,Grey,1399,Grey Cotton Pants
+21,pants,Olive,1499,Olive Cargo Pants
+22,pants,Blue,1599,Denim Jeans
+23,pants,Light Blue,1799,Light Wash Jeans
+24,pants,Dark Blue,1899,Dark Wash Jeans
+25,jeans,Blue,1999,Regular Fit Jeans
+26,jeans,Black,2199,Black Stretch Jeans
+27,jeans,Grey,2099,Grey Slim Jeans
+28,jeans,Light Blue,1999,Light Wash Denim
+29,jeans,Dark Blue,2299,Classic Blue Jeans
+30,dress,White,1799,Summer Dress
+31,dress,Sky Blue,1999,Beach Dress
+32,dress,Pink,2199,Floral Dress
+33,dress,Yellow,1899,Sunshine Dress
+34,dress,Lavender,2099,Lavender Midi Dress
+35,dress,Black,2499,Evening Dress
+36,dress,Red,2399,Party Dress
+37,dress,Green,1999,Casual Maxi Dress
+38,dress,Beige,1899,Linen Dress
+39,saree,Pink,2499,Floral Saree
+40,saree,Red,2999,Silk Saree
+41,saree,Blue,2799,Cotton Saree
+42,saree,Green,2899,Banarasi Saree
+43,saree,Purple,3299,Wedding Saree
+44,saree,Yellow,2599,Printed Saree
+45,kurta,Blue,1599,Printed Kurta
+46,kurta,White,1499,Cotton Kurta
+47,kurta,Black,1699,Festive Kurta
+48,kurta,Green,1799,Designer Kurta
+49,kurta,Maroon,1899,Traditional Kurta
+50,kurta,Mustard,1699,Mustard Kurta
+51,dupatta,Cream,799,Cotton Dupatta
+52,dupatta,Pink,999,Printed Dupatta
+53,dupatta,Blue,1099,Silk Dupatta
+54,dupatta,Green,899,Floral Dupatta
+55,dupatta,Lavender,999,Lavender Dupatta
+56,sandals,Brown,999,Leather Sandals
+57,sandals,Black,1199,Casual Sandals
+58,sandals,White,1399,Beach Sandals
+59,sandals,Tan,1499,Tan Leather Sandals
+60,sandals,Blue,1299,Blue Slip Sandals
+61,shoes,White,2999,Sneakers
+62,shoes,Black,3499,Running Shoes
+63,shoes,Grey,3199,Sports Shoes
+64,shoes,Navy,3299,Training Shoes
+65,shoes,Brown,3599,Leather Shoes
+66,hoodie,Grey,1499,Cotton Hoodie
+67,hoodie,Black,1699,Zip Hoodie
+68,hoodie,Blue,1799,Fleece Hoodie
+69,hoodie,Green,1899,Oversized Hoodie
+70,jacket,Navy,2499,Windcheater Jacket
+71,jacket,Black,2999,Bomber Jacket
+72,jacket,Grey,2899,Denim Jacket
+73,jacket,Olive,3199,Utility Jacket
+74,jacket,Brown,3499,Leather Jacket
+75,hat,Beige,499,Straw Hat
+76,hat,White,599,Sun Hat
+77,hat,Black,699,Bucket Hat
+78,hat,Navy,799,Baseball Cap
+79,hat,Khaki,649,Travel Hat
+80,sunglasses,Black,1299,Aviator Sunglasses
+81,sunglasses,Brown,1499,Polarized Sunglasses
+82,sunglasses,Blue,1599,Mirror Sunglasses
+83,sunglasses,Grey,1399,Classic Sunglasses
+84,handbag,Black,2499,Leather Handbag
+85,handbag,Brown,2699,Tote Bag
+86,handbag,Beige,2299,Canvas Handbag
+87,handbag,Pink,2799,Fashion Handbag
+88,skirt,Black,1499,Pencil Skirt
+89,skirt,Blue,1599,Denim Skirt
+90,skirt,White,1699,Pleated Skirt
+91,skirt,Beige,1499,Cotton Skirt
+92,kameez,Green,1899,Traditional Kameez
+93,kameez,Blue,1799,Printed Kameez
+94,shalwar,White,1399,Cotton Shalwar
+95,shalwar,Cream,1499,Classic Shalwar
+96,sharara,Pink,2499,Party Sharara
+97,sharara,Green,2599,Wedding Sharara
+98,lungi,Blue,699,Cotton Lungi
+99,lungi,Green,749,Checked Lungi
+100,scarf,White,599,Cotton Scarf

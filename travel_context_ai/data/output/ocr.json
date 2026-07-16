@@ -1,0 +1,129 @@
+{
+    "ocr_text": "IndiGo Date of = Booking 20 Jun 2024 11:01 PNRBooKing Rel Partnent stjlus PRUVAF Confirmed Complete Passenger Information Mrs RITA DATTA Aduit Sector Seat GE Add-ons BOM-GOX 36E(Middle) Departing Flight 6E 5284 (A321) 25 Jul 2024 Check-in/Bag Drop Closes: 05.55 hrs Mumbai North Goa BOM Chhatrapati Shivaji Maharaj Ih 25m GOX North Goa Airport International Airport (Terminal 1) 06.55 hrs, 25 Jul 2024 08.20 hrs, 25 Jul 2024 Booking Date reflects in UTC (Coordinated Universal Timel; all other timings mentioned are as per local TIME",
+    "detections": [
+        {
+            "text": "IndiGo",
+            "confidence": 0.65
+        },
+        {
+            "text": "Date of =",
+            "confidence": 0.633
+        },
+        {
+            "text": "Booking 20 Jun 2024 11:01",
+            "confidence": 0.974
+        },
+        {
+            "text": "PNRBooKing Rel",
+            "confidence": 0.301
+        },
+        {
+            "text": "Partnent stjlus",
+            "confidence": 0.161
+        },
+        {
+            "text": "PRUVAF",
+            "confidence": 0.828
+        },
+        {
+            "text": "Confirmed",
+            "confidence": 0.885
+        },
+        {
+            "text": "Complete",
+            "confidence": 0.882
+        },
+        {
+            "text": "Passenger Information",
+            "confidence": 0.864
+        },
+        {
+            "text": "Mrs RITA DATTA Aduit",
+            "confidence": 0.698
+        },
+        {
+            "text": "Sector",
+            "confidence": 1.0
+        },
+        {
+            "text": "Seat",
+            "confidence": 1.0
+        },
+        {
+            "text": "GE Add-ons",
+            "confidence": 0.999
+        },
+        {
+            "text": "BOM-GOX",
+            "confidence": 0.592
+        },
+        {
+            "text": "36E(Middle)",
+            "confidence": 0.793
+        },
+        {
+            "text": "Departing Flight",
+            "confidence": 0.744
+        },
+        {
+            "text": "6E 5284 (A321)",
+            "confidence": 0.566
+        },
+        {
+            "text": "25 Jul 2024",
+            "confidence": 0.888
+        },
+        {
+            "text": "Check-in/Bag Drop Closes: 05.55 hrs",
+            "confidence": 0.719
+        },
+        {
+            "text": "Mumbai",
+            "confidence": 1.0
+        },
+        {
+            "text": "North Goa",
+            "confidence": 0.631
+        },
+        {
+            "text": "BOM",
+            "confidence": 0.852
+        },
+        {
+            "text": "Chhatrapati Shivaji Maharaj",
+            "confidence": 0.878
+        },
+        {
+            "text": "Ih 25m",
+            "confidence": 0.678
+        },
+        {
+            "text": "GOX",
+            "confidence": 0.649
+        },
+        {
+            "text": "North Goa Airport",
+            "confidence": 0.792
+        },
+        {
+            "text": "International Airport (Terminal 1)",
+            "confidence": 0.775
+        },
+        {
+            "text": "06.55 hrs, 25 Jul 2024",
+            "confidence": 0.949
+        },
+        {
+            "text": "08.20 hrs, 25 Jul 2024",
+            "confidence": 0.507
+        },
+        {
+            "text": "Booking Date reflects in UTC (Coordinated Universal Timel; all other timings mentioned are as per",
+            "confidence": 0.608
+        },
+        {
+            "text": "local TIME",
+            "confidence": 0.881
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['dupatta', 'kameez', 'shalwar']
+
+roboflow:
+  workspace: cooking-pot
+  project: dupatta
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/cooking-pot/dupatta/dataset/1
