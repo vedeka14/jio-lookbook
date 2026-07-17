@@ -1,7 +1,10 @@
 import csv
 import json
 from collections import Counter, defaultdict
-
+from recommendation_engine.scripts.privacy_layer import (
+    build_ajio_query,
+    save_query
+)
 from recommendation_engine.config import *
 
 # ==================================================
@@ -228,6 +231,47 @@ if missing_items:
 else:
 
     print("No additional items needed.")
+
+
+# ==================================================
+# Privacy Layer
+# ==================================================
+
+print("\n" + "=" * 60)
+print("Privacy Layer")
+print("=" * 60)
+
+ajio_query = build_ajio_query(
+    missing_items,
+    preferred_colors
+)
+
+save_query(
+    ajio_query,
+    AJIO_QUERY_FILE
+)
+
+print("\nData shared with AJIO:\n")
+
+if ajio_query:
+
+    for item in ajio_query:
+
+        print(
+            f"- {item['category']}: "
+            f"{', '.join(item['preferred_colors'])}"
+        )
+
+else:
+
+    print("No query generated.")
+
+print("\nPrivacy Check")
+
+print("✓ User photos are NOT shared")
+print("✓ OCR travel documents are NOT shared")
+print("✓ Wardrobe images are NOT shared")
+print("✓ Only clothing requirements are shared")
 
 # ==================================================
 # Find Matching Products

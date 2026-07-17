@@ -24,3 +24,4 @@ CATALOG_FILE = CATALOG_DIR / "ajio_catalog.csv"
 WARDROBE_FILE = DATA_DIR / "wardrobe.json"
 
 TRIP_CONTEXT_FILE = DATA_DIR / "trip_context.json"
+AJIO_QUERY_FILE = DATA_DIR / "ajio_query.json"

@@ -1,8 +1,8 @@
-path: C:\Users\Vedeka\Downloads\Jio_Lookbook\yolo11\datasets\merged_dataset
+path: .
 train: train/images
 val: valid/images
 test: test/images
-nc: 26
+nc: 35
 names:
   0: Churidaar
   1: Dhoti
@@ -30,3 +30,12 @@ names:
   23: Handbag
   24: Shoes
   25: Hoodie
+  26: Anarkali Suit
+  27: Anklet
+  28: Earring
+  29: Jodhpuri Traditional Attire
+  30: Kolhapuri Chappal
+  31: Mojdi
+  32: Sherwani
+  33: Slippers
+  34: Turban
