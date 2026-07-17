@@ -1,4 +1,4 @@
-path: .
+path: fashion_ai/yolo11/datasets/merged_dataset
 train: train/images
 val: valid/images
 test: test/images

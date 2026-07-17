@@ -10,8 +10,8 @@ from tqdm import tqdm
 # ==========================================
 # Configuration
 # ==========================================
-RAW_DATASET_DIR = Path(r"C:\Users\Vedeka\Downloads\JioAICloud-Download")
-YOLO_DIR = Path(r"C:\Users\Vedeka\Downloads\Jio_Lookbook\fashion_ai\yolo11")
+RAW_DATASET_DIR = Path(__file__).resolve().parent.parent.parent.parent / "JioAICloud-Download" # Assumes it sits next to the Jio_Lookbook folder
+YOLO_DIR = Path(__file__).resolve().parent.parent / "yolo11"
 DATA_YAML_PATH = YOLO_DIR / "datasets" / "merged_dataset" / "data.yaml"
 OUTPUT_DIR = Path(__file__).parent / "data" / "auto_labeled_dataset"
 
