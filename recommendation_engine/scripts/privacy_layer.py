@@ -12,10 +12,8 @@ def build_ajio_query(missing_items, preferred_colors):
     query = []
 
     for category in missing_items:
-        query.append({
-            "category": category.title(),
-            "preferred_colors": sorted(preferred_colors)
-        })
+        for color in sorted(preferred_colors):
+            query.append(f"Need:\n\n{color} {category.title()}")
 
     return query
 

@@ -257,10 +257,8 @@ if ajio_query:
 
     for item in ajio_query:
 
-        print(
-            f"- {item['category']}: "
-            f"{', '.join(item['preferred_colors'])}"
-        )
+        print(item)
+        print("-" * 20)
 
 else:
 
@@ -268,10 +266,10 @@ else:
 
 print("\nPrivacy Check")
 
-print("✓ User photos are NOT shared")
-print("✓ OCR travel documents are NOT shared")
-print("✓ Wardrobe images are NOT shared")
-print("✓ Only clothing requirements are shared")
+print("v User photos are NOT shared")
+print("v OCR travel documents are NOT shared")
+print("v Wardrobe images are NOT shared")
+print("v Only clothing requirements are shared")
 
 # ==================================================
 # Find Matching Products
