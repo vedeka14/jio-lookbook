@@ -3,7 +3,7 @@ import shutil
 from pathlib import Path
 from PIL import Image
 
-from config import *
+from .config import *
 
 # ==================================================
 # Clean Previous Crops

@@ -1,5 +1,7 @@
 
 import json
+import warnings
+warnings.filterwarnings("ignore")
 import re
 from ollama import chat
 from travel_context_ai.config import *
@@ -25,7 +27,7 @@ Schema:
  "reasoning":""
 }}
 
-Return city names (not airport codes). Infer trip type, weather and packing style.
+Return city names (not airport codes). Infer trip type (must be one of: "Beach", "Mountain", "City"), weather and packing style.
 
 OCR TEXT:
 {ocr["ocr_text"]}

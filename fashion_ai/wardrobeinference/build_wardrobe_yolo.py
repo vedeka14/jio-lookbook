@@ -2,131 +2,157 @@ import json
 import cv2
 from ultralytics import YOLO
 import torch
-from extract_colors import detect_color
+from tqdm import tqdm
 
 # ==================================================
-# Project Paths
+# Project Paths & Modules
 # ==================================================
+from .config import *
+from .extract_colors import detect_color
 
-from config import *
 
-MODEL_PATH = YOLO_MODEL_PATH
+def main():
+    print("=" * 60)
+    print(f"Running YOLO Wardrobe Inference on : {DEVICE.upper()}")
+    if DEVICE == "cuda":
+        print(f"GPU : {torch.cuda.get_device_name(0)}")
+    print("=" * 60)
 
-IMAGE_PATH = PHOTOS_DIR / "ds07_shirt_v1i_yolo26_t_000013.jpg"
+    # ==================================================
+    # Load Model
+    # ==================================================
+    print("Loading YOLO model...")
+    model = YOLO(str(YOLO_MODEL_PATH))
+    model.to(DEVICE)
 
-CROP_FOLDER = COLOR_CROPS_DIR
+    # ==================================================
+    # Read Images
+    # ==================================================
+    image_extensions = {".jpg", ".jpeg", ".png"}
+    image_paths = sorted(
+        [
+            p for p in PHOTOS_DIR.iterdir()
+            if p.suffix.lower() in image_extensions
+        ]
+    )
 
-# ==================================================
-# Device
-# ==================================================
+    print("\n" + "=" * 60)
+    print(f"Found {len(image_paths)} image(s) in {PHOTOS_DIR.name}")
+    print("=" * 60)
 
-print("=" * 60)
-print(f"Running on : {DEVICE.upper()}")
+    all_detections = []
+    COLOR_CROPS_DIR.mkdir(parents=True, exist_ok=True)
 
-if DEVICE == "cuda":
-    print(f"GPU : {torch.cuda.get_device_name(0)}")
+    # ==================================================
+    # Run Detection & Color Extraction
+    # ==================================================
+    for image_path in tqdm(image_paths, desc="Processing Photos", unit="img"):
+        img = cv2.imread(str(image_path))
 
-print("=" * 60)
+        if img is None:
+            continue
 
-# ==================================================
-# Load Model
-# ==================================================
-print("Loading YOLO model...")
+        height, width = img.shape[:2]
 
-model = YOLO(str(MODEL_PATH))
-model.to(DEVICE)
+        results = model.predict(
+            source=str(image_path),
+            conf=0.50,
+            device=DEVICE,
+            verbose=False
+        )
+        result = results[0]
 
-# ==================================================
-# Read Image
-# ==================================================
-img = cv2.imread(str(IMAGE_PATH))
+        if len(result.boxes) == 0:
+            continue
 
-if img is None:
-    raise FileNotFoundError(f"Image not found:\n{IMAGE_PATH}")
+        for i, box in enumerate(result.boxes):
+            confidence = float(box.conf[0])
+            if confidence < 0.50:
+                continue
 
-height, width = img.shape[:2]
+            class_id = int(box.cls[0])
+            category = result.names[class_id]
 
-# ==================================================
-# Predict
-# ==================================================
-print("Running detection...\n")
+            x1, y1, x2, y2 = map(int, box.xyxy[0])
+            x1 = max(0, x1)
+            y1 = max(0, y1)
+            x2 = min(width, x2)
+            y2 = min(height, y2)
 
-results = model.predict(
-    source=str(IMAGE_PATH),
-    conf=0.50,
-    device=DEVICE,
-    verbose=False
-)
+            crop = img[y1:y2, x1:x2]
+            if crop.size == 0:
+                continue
 
-result = results[0]
+            crop_name = f"{image_path.stem}_{category}_{i+1:03d}.jpg"
+            crop_path = COLOR_CROPS_DIR / crop_name
+            cv2.imwrite(str(crop_path), crop)
 
-detections = []
+            try:
+                color = detect_color(crop)
+            except Exception:
+                color = "Unknown"
 
-# ==================================================
-# Process Results
-# ==================================================
-for i, box in enumerate(result.boxes):
+            item = {
+                "image": image_path.name,
+                "category": category,
+                "color": color,
+                "confidence": round(confidence, 3),
+                "crop": crop_name,
+                "bbox": [x1, y1, x2, y2]
+            }
+            all_detections.append(item)
 
-    confidence = float(box.conf[0])
+    # ==================================================
+    # Save Raw Detections (COLORS_FILE)
+    # ==================================================
+    COLORS_FILE.parent.mkdir(parents=True, exist_ok=True)
+    with open(COLORS_FILE, "w", encoding="utf-8") as f:
+        json.dump(all_detections, f, indent=4)
 
-    if confidence < 0.50:
-        continue
+    # ==================================================
+    # Build Deduplicated Wardrobe Database (WARDROBE_FILE)
+    # ==================================================
+    best_detections = {}
+    for item in all_detections:
+        category = item["category"]
+        color = item["color"]
+        confidence = item["confidence"]
+        image = item["image"]
 
-    class_id = int(box.cls[0])
+        key = (category.lower(), color.lower())
+        if key not in best_detections or confidence > best_detections[key]["confidence"]:
+            best_detections[key] = {
+                "image": image,
+                "category": category,
+                "color": color,
+                "confidence": confidence
+            }
 
-    x1, y1, x2, y2 = map(int, box.xyxy[0])
+    wardrobe = sorted(best_detections.values(), key=lambda x: (x["category"], x["color"]))
 
-    x1 = max(0, x1)
-    y1 = max(0, y1)
-    x2 = min(width, x2)
-    y2 = min(height, y2)
+    with open(WARDROBE_FILE, "w", encoding="utf-8") as f:
+        json.dump(wardrobe, f, indent=4)
 
-    crop = img[y1:y2, x1:x2]
+    # ==================================================
+    # Summary
+    # ==================================================
+    print("\n" + "=" * 60)
+    print("Wardrobe Items Summary")
+    print("=" * 60)
+    for item in wardrobe:
+        print(
+            f"{item['image']:<45}"
+            f"{item['category']:<18}"
+            f"{item['color']:<15}"
+            f"{item['confidence']:.2f}"
+        )
 
-    if crop.size == 0:
-        continue
+    print("\n" + "=" * 60)
+    print("YOLO Wardrobe Inference Complete")
+    print("=" * 60)
+    print(f"Total Detections : {len(all_detections)} (saved to {COLORS_FILE.name})")
+    print(f"Unique Items     : {len(wardrobe)} (saved to {WARDROBE_FILE.name})")
 
-    CROP_FOLDER.mkdir(parents=True, exist_ok=True)
-    crop_path = CROP_FOLDER / f"crop_{i}.jpg"
-    cv2.imwrite(str(crop_path), crop)
 
-    try:
-        color = detect_color(crop)
-    except Exception as e:
-        print(f"Color detection failed: {e}")
-        color = "Unknown"
-
-    item = {
-        "category": result.names[class_id],
-        "color": color,
-        "confidence": round(confidence, 3)
-    }
-
-    detections.append(item)
-
-    print("-" * 60)
-    print(f"Detection #{i+1}")
-    print(f"Category     : {item['category']}")
-    print(f"Color        : {item['color']}")
-    print(f"Confidence   : {item['confidence']}")
-    print(f"Bounding Box : ({x1}, {y1}, {x2}, {y2})")
-    print(f"Crop Saved   : {crop_path}")
-
-# ==================================================
-# Save JSON
-# ==================================================
-json_file = COLORS_FILE
-
-# Ensure directory exists
-json_file.parent.mkdir(parents=True, exist_ok=True)
-
-with open(json_file, "w") as f:
-    json.dump(detections, f, indent=4)
-
-print("\n" + "=" * 60)
-print("Finished Successfully")
-print("=" * 60)
-
-print(f"JSON Saved : {json_file}")
-
-print(json.dumps(detections, indent=4))
+if __name__ == "__main__":
+    main()

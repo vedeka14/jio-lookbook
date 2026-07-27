@@ -1,12 +1,15 @@
 import os
 os.environ["TRANSFORMERS_NO_TF"] = "1"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+import warnings
+warnings.filterwarnings("ignore")
 
 import json
 import torch
 from PIL import Image
 from transformers import Owlv2Processor, Owlv2ForObjectDetection
 
-from config import *
+from .config import *
 
 # ==================================================
 # Load OWL-ViT

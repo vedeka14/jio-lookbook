@@ -3,8 +3,8 @@ import json
 import math
 from pathlib import Path
 
-from config import *
-from extract_colors import detect_color
+from .config import *
+from .extract_colors import detect_color
 
 def main():
     print("=" * 60)

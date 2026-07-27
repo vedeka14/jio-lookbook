@@ -1,6 +1,6 @@
 import json
 
-from config import *
+from .config import *
 
 # ==================================================
 # Load Files

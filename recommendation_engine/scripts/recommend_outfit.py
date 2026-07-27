@@ -135,6 +135,21 @@ trip_type = trip.get("trip", "Unknown")
 
 required_items = TRIP_REQUIREMENTS.get(trip_type, [])
 
+if not required_items:
+    dest = trip.get("destination", "").lower()
+    acts = " ".join(trip.get("activities", [])).lower()
+    tags = " ".join(trip.get("recommendation_tags", [])).lower()
+    combined = f"{trip_type} {dest} {acts} {tags}".lower()
+    if "beach" in combined or "goa" in combined or "coastal" in combined or "tropical" in combined:
+        trip_type = "Beach"
+        required_items = TRIP_REQUIREMENTS["Beach"]
+    elif "mountain" in combined or "hill" in combined or "trek" in combined or "snow" in combined:
+        trip_type = "Mountain"
+        required_items = TRIP_REQUIREMENTS["Mountain"]
+    elif "city" in combined or "urban" in combined or "business" in combined:
+        trip_type = "City"
+        required_items = TRIP_REQUIREMENTS["City"]
+
 print("\n" + "=" * 60)
 print(f"{trip_type} Trip Requirements")
 print("=" * 60)
