@@ -1,9 +1,18 @@
 import csv
 import json
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 from collections import Counter, defaultdict
 from recommendation_engine.scripts.privacy_layer import (
     build_ajio_query,
-    save_query
+    save_query,
+    display_query
 )
 from recommendation_engine.config import *
 
@@ -266,25 +275,20 @@ save_query(
     AJIO_QUERY_FILE
 )
 
-print("\nData shared with AJIO:\n")
-
-if ajio_query:
-
-    for item in ajio_query:
-
-        print(item)
-        print("-" * 20)
-
-else:
-
-    print("No query generated.")
+display_query(missing_items, preferred_colors)
 
 print("\nPrivacy Check")
 
-print("v User photos are NOT shared")
-print("v OCR travel documents are NOT shared")
-print("v Wardrobe images are NOT shared")
-print("v Only clothing requirements are shared")
+try:
+    print("✓ User photos are NOT shared")
+    print("✓ OCR travel documents are NOT shared")
+    print("✓ Wardrobe images are NOT shared")
+    print("✓ Only clothing requirements are shared")
+except UnicodeEncodeError:
+    print("[OK] User photos are NOT shared")
+    print("[OK] OCR travel documents are NOT shared")
+    print("[OK] Wardrobe images are NOT shared")
+    print("[OK] Only clothing requirements are shared")
 
 # ==================================================
 # Find Matching Products
@@ -324,6 +328,21 @@ for product in recommended_products:
     recommendations[product["category"]].append(product)
 
 print("\n" + "=" * 60)
+print(f"Recommended {trip_type} Outfit")
+print("=" * 60)
+
+if recommendations:
+    for category, products in recommendations.items():
+        if products:
+            top_product = products[0]
+            try:
+                print(f"✓ {top_product['color']} {category.title()}")
+            except UnicodeEncodeError:
+                print(f"[OK] {top_product['color']} {category.title()}")
+else:
+    print("No outfit recommendations needed.")
+
+print("\n" + "=" * 60)
 print("Recommended Products")
 print("=" * 60)
 
@@ -348,12 +367,28 @@ else:
 # ==================================================
 
 print("\n" + "=" * 60)
-print("Recommendation Summary")
+print("Trip Summary")
 print("=" * 60)
 
-print(f"Destination : {trip.get('destination')}")
-print(f"Trip        : {trip.get('trip')}")
-print(f"Weather     : {trip.get('weather')}")
-print(f"Own Items   : {len(owned_categories)}")
-print(f"Need Items  : {len(missing_items)}")
-print(f"Suggestions : {len(recommended_products)}")
+print(f"Destination : {trip.get('destination', 'N/A')}")
+print(f"Trip Type   : {trip.get('trip', 'N/A')}")
+print(f"Weather     : {trip.get('weather', 'N/A')}")
+
+print("\nWardrobe")
+try:
+    print(f"\n✓ {len(owned_categories)} Clothing Categories")
+except UnicodeEncodeError:
+    print(f"\n[OK] {len(owned_categories)} Clothing Categories")
+
+print("\nNeed\n")
+for item in missing_items:
+    try:
+        print(f"✓ {item.title()}")
+    except UnicodeEncodeError:
+        print(f"[OK] {item.title()}")
+
+print("\nCatalog Matches")
+try:
+    print(f"\n✓ {len(recommended_products)} Products Found")
+except UnicodeEncodeError:
+    print(f"\n[OK] {len(recommended_products)} Products Found")

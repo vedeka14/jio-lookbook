@@ -1,5 +1,12 @@
 
 import json
+import sys
+
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
 import warnings
 warnings.filterwarnings("ignore")
 import re
@@ -50,5 +57,47 @@ outfile=OUTPUT_DIR/"travel_context.json"
 with open(outfile,"w",encoding="utf-8") as f:
     json.dump(context,f,indent=4,ensure_ascii=False)
 
-print(json.dumps(context,indent=4))
-print("Saved:",outfile)
+print("\n" + "=" * 60)
+print("Trip Summary")
+print("=" * 60)
+
+print(f"\nDestination   : {context.get('destination', 'N/A')}")
+print(f"Trip Type     : {context.get('trip', 'N/A')}")
+print(f"Weather       : {context.get('weather', 'N/A')}")
+
+print("\nPacking Style")
+packing = context.get('packing_style', [])
+if isinstance(packing, str):
+    items = [item.strip(" .") for item in re.split(r',|\band\b', packing) if item.strip(" .")]
+    for item in items:
+        try:
+            print(f"• {item.capitalize()}")
+        except UnicodeEncodeError:
+            print(f"- {item.capitalize()}")
+elif isinstance(packing, list):
+    for item in packing:
+        try:
+            print(f"• {str(item).capitalize()}")
+        except UnicodeEncodeError:
+            print(f"- {str(item).capitalize()}")
+
+print("\nActivities")
+activities = context.get('activities', [])
+if isinstance(activities, list):
+    for act in activities[:4]:
+        try:
+            print(f"• {act}")
+        except UnicodeEncodeError:
+            print(f"- {act}")
+elif isinstance(activities, str):
+    items = [item.strip(" .") for item in re.split(r',|\band\b', activities) if item.strip(" .")]
+    for item in items[:4]:
+        try:
+            print(f"• {item.capitalize()}")
+        except UnicodeEncodeError:
+            print(f"- {item.capitalize()}")
+
+try:
+    print("\n✓ Trip Context Generated")
+except UnicodeEncodeError:
+    print("\n[OK] Trip Context Generated")

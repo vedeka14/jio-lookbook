@@ -1,8 +1,16 @@
 import json
+import sys
+if hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(encoding="utf-8")
+    except Exception:
+        pass
+
 import cv2
 from ultralytics import YOLO
 import torch
 from tqdm import tqdm
+from collections import Counter
 
 # ==================================================
 # Project Paths & Modules
@@ -136,16 +144,25 @@ def main():
     # ==================================================
     # Summary
     # ==================================================
+    cat_counts = Counter(item["category"] for item in wardrobe)
+
     print("\n" + "=" * 60)
-    print("Wardrobe Items Summary")
+    print("Wardrobe Summary")
     print("=" * 60)
-    for item in wardrobe:
-        print(
-            f"{item['image']:<45}"
-            f"{item['category']:<18}"
-            f"{item['color']:<15}"
-            f"{item['confidence']:.2f}"
-        )
+    print(f"Images Processed  : {len(image_paths)}")
+    print(f"Unique Categories : {len(cat_counts)}")
+
+    print("\nDetected Items\n")
+    for category, count in sorted(cat_counts.items(), key=lambda x: (-x[1], x[0])):
+        display_cat = category
+        if display_cat.lower() == "tshirt":
+            display_cat = "T-Shirt"
+        if count != 1 and not display_cat.endswith("s"):
+            display_cat += "s"
+        try:
+            print(f"✓ {count} {display_cat}\n")
+        except UnicodeEncodeError:
+            print(f"[OK] {count} {display_cat}\n")
 
     print("\n" + "=" * 60)
     print("YOLO Wardrobe Inference Complete")
