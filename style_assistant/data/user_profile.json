@@ -1,0 +1,18 @@
+{
+    "name": "Sophie",
+    "gender": "Female",
+    "age": 22,
+    "skin_tone": "Warm",
+    "body_type": "Pear",
+    "height": "5 ft 5 in",
+    "budget": 5000,
+    "preferred_style": "Casual",
+    "favorite_colors": [
+        "Beige",
+        "Black",
+        "Blue"
+    ],
+    "avoid_colors": [
+        "Pink"
+    ]
+}

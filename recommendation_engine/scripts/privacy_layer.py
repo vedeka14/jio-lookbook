@@ -12,15 +12,23 @@ def build_ajio_query(missing_items, preferred_colors):
     """
     Build a privacy-safe query.
 
-    This is the ONLY information that would be sent to AJIO.
-    No user photos, OCR text, or wardrobe images are included.
+    Only clothing requirements are included.
+    No photos, OCR text, travel documents, or wardrobe images.
     """
 
     query = []
 
-    for category in missing_items:
-        for color in sorted(preferred_colors):
-            query.append(f"Need:\n\n{color} {category.title()}")
+    for item in missing_items:
+
+        query.append({
+
+            "category": item["category"].title(),
+            "reason": item["reason"],
+            "priority": item["priority"],
+
+            "preferred_colors": sorted(preferred_colors)
+
+        })
 
     return query
 
@@ -46,8 +54,9 @@ def display_query(missing_items, preferred_colors):
         print("No query generated.")
         return
 
-    for i, category in enumerate(missing_items):
-        print(f"Category : {category.title()}")
+    for i, item in enumerate(missing_items):
+        print(f"Category : {item['category'].title()} ({item['priority']})")
+        print(f"Reason   : {item['reason']}")
         print("Colors")
         for color in sorted(preferred_colors):
             try:

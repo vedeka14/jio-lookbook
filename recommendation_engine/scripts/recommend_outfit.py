@@ -16,32 +16,43 @@ from recommendation_engine.scripts.privacy_layer import (
 )
 from recommendation_engine.config import *
 
-# ==================================================
-# Trip Requirements
-# ==================================================
-
-TRIP_REQUIREMENTS = {
-
-    "Beach": [
-        "shirt",
-        "shorts",
-        "sandals",
-        "hat",
-        "sunglasses"
-    ],
-
-    "Mountain": [
-        "hoodie",
-        "jacket",
-        "pants",
-        "shoes"
-    ],
-
-    "City": [
-        "shirt",
-        "pants",
-        "shoes"
-    ]
+RULES = {
+    "weather": {
+        "hot": [
+            {"category": "shorts", "reason": "Hot weather", "priority": "Medium"},
+            {"category": "sandals", "reason": "Stay cool", "priority": "Medium"},
+            {"category": "hat", "reason": "Sun protection", "priority": "Low"},
+            {"category": "sunglasses", "reason": "Eye protection", "priority": "Low"}
+        ],
+        "cold": [
+            {"category": "jacket", "reason": "Cold weather", "priority": "High"},
+            {"category": "sweater", "reason": "Layering", "priority": "Medium"}
+        ],
+        "rainy": [
+            {"category": "raincoat", "reason": "Rain protection", "priority": "High"},
+            {"category": "umbrella", "reason": "Rain protection", "priority": "High"}
+        ]
+    },
+    "trip": {
+        "mountain": [
+            {"category": "boots", "reason": "Mountain terrain", "priority": "High"}
+        ],
+        "beach": [
+            {"category": "sandals", "reason": "Beach environment", "priority": "Medium"}
+        ]
+    },
+    "activities": {
+        "snow": [
+            {"category": "boots", "reason": "Snow activities", "priority": "High"},
+            {"category": "gloves", "reason": "Cold protection", "priority": "High"}
+        ],
+        "swim": [
+            {"category": "swimwear", "reason": "Swimming", "priority": "High"}
+        ],
+        "trek": [
+            {"category": "shoes", "reason": "Trekking", "priority": "High"}
+        ]
+    }
 }
 
 # ==================================================
@@ -137,34 +148,62 @@ with open(CATALOG_FILE, "r", encoding="utf-8") as f:
 print(f"\nFound {len(catalog)} catalog item(s).\n")
 
 # ==================================================
-# Trip Requirements
+# Recommendation Rules
 # ==================================================
 
-trip_type = trip.get("trip", "Unknown")
+required_items_dict = {}
 
-required_items = TRIP_REQUIREMENTS.get(trip_type, [])
+weather = trip.get("weather", "").lower()
+if "hot" in weather or "humid" in weather or "warm" in weather:
+    for item in RULES["weather"]["hot"]:
+        required_items_dict[item["category"]] = item
+elif "cold" in weather or "snow" in weather or "chill" in weather:
+    for item in RULES["weather"]["cold"]:
+        required_items_dict[item["category"]] = item
+elif "rainy" in weather or "monsoon" in weather or "wet" in weather:
+    for item in RULES["weather"]["rainy"]:
+        required_items_dict[item["category"]] = item
 
-if not required_items:
-    dest = trip.get("destination", "").lower()
-    acts = " ".join(trip.get("activities", [])).lower()
-    tags = " ".join(trip.get("recommendation_tags", [])).lower()
-    combined = f"{trip_type} {dest} {acts} {tags}".lower()
-    if "beach" in combined or "goa" in combined or "coastal" in combined or "tropical" in combined:
-        trip_type = "Beach"
-        required_items = TRIP_REQUIREMENTS["Beach"]
-    elif "mountain" in combined or "hill" in combined or "trek" in combined or "snow" in combined:
-        trip_type = "Mountain"
-        required_items = TRIP_REQUIREMENTS["Mountain"]
-    elif "city" in combined or "urban" in combined or "business" in combined:
-        trip_type = "City"
-        required_items = TRIP_REQUIREMENTS["City"]
+trip_type = trip.get("trip", "").lower()
+if "mountain" in trip_type or "hill" in trip_type:
+    for item in RULES["trip"]["mountain"]:
+        required_items_dict[item["category"]] = item
+elif "beach" in trip_type or "coastal" in trip_type:
+    for item in RULES["trip"]["beach"]:
+        required_items_dict[item["category"]] = item
+
+activities = trip.get("activities", [])
+if isinstance(activities, str):
+    activities_str = activities.lower()
+else:
+    activities_str = " ".join(activities).lower()
+
+if "snow" in activities_str:
+    for item in RULES["activities"]["snow"]:
+        required_items_dict[item["category"]] = item
+if "swim" in activities_str:
+    for item in RULES["activities"]["swim"]:
+        required_items_dict[item["category"]] = item
+if "trek" in activities_str or "hik" in activities_str:
+    for item in RULES["activities"]["trek"]:
+        required_items_dict[item["category"]] = item
+
+if not required_items_dict:
+    default_items = [
+        {"category": "jeans", "reason": "Casual wear", "priority": "Low"},
+        {"category": "tshirt", "reason": "Casual wear", "priority": "Low"}
+    ]
+    for item in default_items:
+        required_items_dict[item["category"]] = item
+
+required_items = list(required_items_dict.values())
 
 print("\n" + "=" * 60)
-print(f"{trip_type} Trip Requirements")
+print("Combined Requirements")
 print("=" * 60)
 
 for item in required_items:
-    print(item)
+    print(f"{item['category'].title()} ({item['priority']}): {item['reason']}")
 
 # ==================================================
 # Already Owned
@@ -239,7 +278,7 @@ missing_items = [
 
     for item in required_items
 
-    if item.lower() not in owned_categories
+    if item["category"].lower() not in owned_categories
 
 ]
 
@@ -250,7 +289,7 @@ print("=" * 60)
 if missing_items:
 
     for item in missing_items:
-        print(item)
+        print(f"{item['category'].title()} ({item['priority']})")
 
 else:
 
@@ -296,7 +335,7 @@ except UnicodeEncodeError:
 
 missing_categories = {
 
-    item.lower()
+    item["category"].lower()
 
     for item in missing_items
 
@@ -328,7 +367,7 @@ for product in recommended_products:
     recommendations[product["category"]].append(product)
 
 print("\n" + "=" * 60)
-print(f"Recommended {trip_type} Outfit")
+print(f"Recommended Outfit")
 print("=" * 60)
 
 if recommendations:
@@ -383,9 +422,9 @@ except UnicodeEncodeError:
 print("\nNeed\n")
 for item in missing_items:
     try:
-        print(f"✓ {item.title()}")
+        print(f"✓ {item['category'].title()}")
     except UnicodeEncodeError:
-        print(f"[OK] {item.title()}")
+        print(f"[OK] {item['category'].title()}")
 
 print("\nCatalog Matches")
 try:

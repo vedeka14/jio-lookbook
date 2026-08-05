@@ -1,30 +1,72 @@
 [
-    "Need:\n\nBeige Shorts",
-    "Need:\n\nBlack Shorts",
-    "Need:\n\nBlue Shorts",
-    "Need:\n\nBrown Shorts",
-    "Need:\n\nCream Shorts",
-    "Need:\n\nGrey Shorts",
-    "Need:\n\nWhite Shorts",
-    "Need:\n\nBeige Sandals",
-    "Need:\n\nBlack Sandals",
-    "Need:\n\nBlue Sandals",
-    "Need:\n\nBrown Sandals",
-    "Need:\n\nCream Sandals",
-    "Need:\n\nGrey Sandals",
-    "Need:\n\nWhite Sandals",
-    "Need:\n\nBeige Hat",
-    "Need:\n\nBlack Hat",
-    "Need:\n\nBlue Hat",
-    "Need:\n\nBrown Hat",
-    "Need:\n\nCream Hat",
-    "Need:\n\nGrey Hat",
-    "Need:\n\nWhite Hat",
-    "Need:\n\nBeige Sunglasses",
-    "Need:\n\nBlack Sunglasses",
-    "Need:\n\nBlue Sunglasses",
-    "Need:\n\nBrown Sunglasses",
-    "Need:\n\nCream Sunglasses",
-    "Need:\n\nGrey Sunglasses",
-    "Need:\n\nWhite Sunglasses"
+    {
+        "category": "Jacket",
+        "reason": "Cold weather",
+        "priority": "High",
+        "preferred_colors": [
+            "Beige",
+            "Black",
+            "Blue",
+            "Brown",
+            "Cream",
+            "Grey",
+            "White"
+        ]
+    },
+    {
+        "category": "Sweater",
+        "reason": "Layering",
+        "priority": "Medium",
+        "preferred_colors": [
+            "Beige",
+            "Black",
+            "Blue",
+            "Brown",
+            "Cream",
+            "Grey",
+            "White"
+        ]
+    },
+    {
+        "category": "Sandals",
+        "reason": "Beach environment",
+        "priority": "Medium",
+        "preferred_colors": [
+            "Beige",
+            "Black",
+            "Blue",
+            "Brown",
+            "Cream",
+            "Grey",
+            "White"
+        ]
+    },
+    {
+        "category": "Boots",
+        "reason": "Snow activities",
+        "priority": "High",
+        "preferred_colors": [
+            "Beige",
+            "Black",
+            "Blue",
+            "Brown",
+            "Cream",
+            "Grey",
+            "White"
+        ]
+    },
+    {
+        "category": "Gloves",
+        "reason": "Cold protection",
+        "priority": "High",
+        "preferred_colors": [
+            "Beige",
+            "Black",
+            "Blue",
+            "Brown",
+            "Cream",
+            "Grey",
+            "White"
+        ]
+    }
 ]
