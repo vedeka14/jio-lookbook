@@ -41,7 +41,7 @@ def save_query(query, output_file):
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(query, f, indent=4)
 
-    print(f"\nPrivacy-safe query saved to:\n{output_file}")
+    print("\nPrivacy-safe query generated successfully.\n✓ Ready for AJIO search")
 
 
 def display_query(missing_items, preferred_colors):

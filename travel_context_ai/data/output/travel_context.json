@@ -1,20 +1,20 @@
 {
     "origin": "Mumbai",
     "destination": "Goa",
-    "travel_date": "2024-07-25",
+    "travel_date": "25 Jul 2024",
     "trip": "Beach",
-    "weather": "Hot and Humid",
-    "packing_style": "Light clothing, swimwear, sunscreen, and a hat",
+    "weather": "Tropical",
+    "packing_style": "Light and breathable clothing, swimwear, sunscreen",
     "activities": [
-        "Beaches",
-        "Water Sports",
-        "Cafe Hopping",
-        "Sunset Watching"
+        "Swimming",
+        "Sunbathing",
+        "Beach walks",
+        "Snorkeling"
     ],
     "recommendation_tags": [
-        "Relaxation",
-        "Water sports",
-        "Cultural experiences"
+        "Pack for warm weather",
+        "Bring sunscreen",
+        "Explore coastal attractions"
     ],
-    "reasoning": "The trip is to Goa, a coastal destination known for beaches. July in Goa experiences hot and humid weather, requiring light packing. Activities focus on beach-related pursuits and cultural exploration."
+    "reasoning": "The trip to Goa (a coastal destination) implies a beach vacation. Tropical weather is typical for Goa, requiring light packing. Activities focus on beach-related pursuits."
 }

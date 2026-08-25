@@ -73,3 +73,13 @@ dist/
 
 # Optional
 # **/*.pt
+
+# ==================================================
+# App Database & Uploads
+# ==================================================
+fashion_ai/wardrobeinference/data/photos/
+fashion_ai/wardrobeinference/data/crops/
+fashion_ai/wardrobeinference/data/color_crops/
+fashion_ai/wardrobeinference/data/*.json
+style_assistant/data/uploads/
+temp_downloads/

@@ -3,7 +3,7 @@
     "detections": [
         {
             "text": "IndiGo",
-            "confidence": 0.65
+            "confidence": 0.665
         },
         {
             "text": "Date of =",
@@ -15,7 +15,7 @@
         },
         {
             "text": "PNRBooKing Rel",
-            "confidence": 0.301
+            "confidence": 0.283
         },
         {
             "text": "Partnent stjlus",
@@ -23,11 +23,11 @@
         },
         {
             "text": "PRUVAF",
-            "confidence": 0.828
+            "confidence": 0.806
         },
         {
             "text": "Confirmed",
-            "confidence": 0.885
+            "confidence": 0.786
         },
         {
             "text": "Complete",

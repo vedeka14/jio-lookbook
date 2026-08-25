@@ -19,17 +19,21 @@ from .config import *
 from .extract_colors import detect_color
 
 
-def main():
-    print("=" * 60)
-    print(f"Running YOLO Wardrobe Inference on : {DEVICE.upper()}")
+def build_wardrobe(silent=False):
+    def _print(*args, **kwargs):
+        if not silent:
+            print(*args, **kwargs)
+
+    _print("=" * 60)
+    _print(f"Running YOLO Wardrobe Inference on : {DEVICE.upper()}")
     if DEVICE == "cuda":
-        print(f"GPU : {torch.cuda.get_device_name(0)}")
-    print("=" * 60)
+        _print(f"GPU : {torch.cuda.get_device_name(0)}")
+    _print("=" * 60)
 
     # ==================================================
     # Load Model
     # ==================================================
-    print("Loading YOLO model...")
+    _print("Loading YOLO model...")
     model = YOLO(str(YOLO_MODEL_PATH))
     model.to(DEVICE)
 
@@ -44,9 +48,9 @@ def main():
         ]
     )
 
-    print("\n" + "=" * 60)
-    print(f"Found {len(image_paths)} image(s) in {PHOTOS_DIR.name}")
-    print("=" * 60)
+    _print("\n" + "=" * 60)
+    _print(f"Found {len(image_paths)} image(s) in {PHOTOS_DIR.name}")
+    _print("=" * 60)
 
     all_detections = []
     COLOR_CROPS_DIR.mkdir(parents=True, exist_ok=True)
@@ -54,7 +58,7 @@ def main():
     # ==================================================
     # Run Detection & Color Extraction
     # ==================================================
-    for image_path in tqdm(image_paths, desc="Processing Photos", unit="img"):
+    for image_path in tqdm(image_paths, desc="Processing Photos", unit="img", disable=silent):
         img = cv2.imread(str(image_path))
 
         if img is None:
@@ -79,7 +83,9 @@ def main():
                 continue
 
             class_id = int(box.cls[0])
-            category = result.names[class_id]
+            category = result.names[class_id].lower()
+            if category == "tshirt":
+                category = "t-shirt"
 
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             x1 = max(0, x1)
@@ -120,6 +126,22 @@ def main():
     # ==================================================
     # Build Deduplicated Wardrobe Database (WARDROBE_FILE)
     # ==================================================
+    def enrich_metadata(cat):
+        c = cat.lower()
+        if c in ["saree", "lehenga", "kurta", "kurti", "churidaar", "anarkali", "sherwani"]:
+            return {"style": "traditional/ethnic", "occasion": ["wedding", "festival", "traditional"], "weather": "all", "fit": "relaxed"}
+        if c in ["shirt", "trousers", "blazer", "suit", "pants"]:
+            return {"style": "versatile/smart-casual", "occasion": ["office", "dinner", "business", "casual day"], "weather": "all", "fit": "tailored"}
+        if c in ["t-shirt", "jeans", "shorts", "sneakers", "cap", "hoodie"]:
+            return {"style": "casual/street", "occasion": ["travel", "sightseeing", "casual day", "cafe"], "weather": "all", "fit": "regular"}
+        if c in ["swimwear", "bikini", "trunks", "swimsuit", "rash guard", "swim shirt", "swim shorts"]:
+            return {"style": "beachwear/active", "occasion": ["beach", "swimming", "snorkeling"], "weather": "hot", "fit": "fitted"}
+        if c in ["maxi", "dress", "skirt", "gown", "jumpsuit"]:
+            return {"style": "elegant/chic", "occasion": ["dinner", "cafe", "party", "club"], "weather": "warm", "fit": "flowy"}
+        if c in ["jacket", "sweater", "coat", "cardigan", "overcoat"]:
+            return {"style": "layer", "occasion": ["travel", "evening", "office", "casual"], "weather": "cold/breezy", "fit": "regular"}
+        return {"style": "versatile", "occasion": ["any", "casual"], "weather": "all", "fit": "regular"}
+
     best_detections = {}
     for item in all_detections:
         category = item["category"]
@@ -129,11 +151,17 @@ def main():
 
         key = (category.lower(), color.lower())
         if key not in best_detections or confidence > best_detections[key]["confidence"]:
+            meta = enrich_metadata(category)
             best_detections[key] = {
                 "image": image,
                 "category": category,
                 "color": color,
-                "confidence": confidence
+                "confidence": confidence,
+                "crop": item.get("crop", ""),
+                "style": meta["style"],
+                "occasion": meta["occasion"],
+                "weather": meta["weather"],
+                "fit": meta["fit"]
             }
 
     wardrobe = sorted(best_detections.values(), key=lambda x: (x["category"], x["color"]))
@@ -146,30 +174,34 @@ def main():
     # ==================================================
     cat_counts = Counter(item["category"] for item in wardrobe)
 
-    print("\n" + "=" * 60)
-    print("Wardrobe Summary")
-    print("=" * 60)
-    print(f"Images Processed  : {len(image_paths)}")
-    print(f"Unique Categories : {len(cat_counts)}")
+    _print("\n" + "=" * 60)
+    _print("Wardrobe Summary")
+    _print("=" * 60)
+    _print(f"Images Processed  : {len(image_paths)}")
+    _print(f"Unique Categories : {len(cat_counts)}")
 
-    print("\nDetected Items\n")
+    _print("\nDetected Items\n")
     for category, count in sorted(cat_counts.items(), key=lambda x: (-x[1], x[0])):
         display_cat = category
-        if display_cat.lower() == "tshirt":
+        if display_cat.lower() == "t-shirt":
             display_cat = "T-Shirt"
         if count != 1 and not display_cat.endswith("s"):
             display_cat += "s"
         try:
-            print(f"✓ {count} {display_cat}\n")
+            _print(f"✓ {count} {display_cat}\n")
         except UnicodeEncodeError:
-            print(f"[OK] {count} {display_cat}\n")
+            _print(f"[OK] {count} {display_cat}\n")
 
-    print("\n" + "=" * 60)
-    print("YOLO Wardrobe Inference Complete")
-    print("=" * 60)
-    print(f"Total Detections : {len(all_detections)} (saved to {COLORS_FILE.name})")
-    print(f"Unique Items     : {len(wardrobe)} (saved to {WARDROBE_FILE.name})")
+    _print("\n" + "=" * 60)
+    _print("YOLO Wardrobe Inference Complete")
+    _print("=" * 60)
+    _print(f"Total Detections : {len(all_detections)} (saved to {COLORS_FILE.name})")
+    _print(f"Unique Items     : {len(wardrobe)} (saved to {WARDROBE_FILE.name})")
 
+    return wardrobe
+
+def main():
+    build_wardrobe(silent=False)
 
 if __name__ == "__main__":
     main()
