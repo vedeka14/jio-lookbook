@@ -1,0 +1,13 @@
+@echo off
+echo Starting Jio Lookbook...
+
+echo Starting Ollama AI Engine in the background...
+start /B ollama serve >nul 2>&1
+
+echo Waiting for Ollama to boot...
+timeout /t 3 /nobreak >nul
+
+echo Starting Streamlit App...
+python -m streamlit run app.py
+
+pause
