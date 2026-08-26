@@ -4,17 +4,17 @@
     "travel_date": "25 Jul 2024",
     "trip": "Beach",
     "weather": "Tropical",
-    "packing_style": "Light and breathable clothing, swimwear, sunscreen",
+    "packing_style": "Light, breathable clothing; sunscreen; swimwear",
     "activities": [
         "Swimming",
         "Sunbathing",
         "Beach walks",
-        "Snorkeling"
+        "Local tours"
     ],
     "recommendation_tags": [
-        "Pack for warm weather",
-        "Bring sunscreen",
-        "Explore coastal attractions"
+        "Beach Activities",
+        "Local Cuisine",
+        "Sun Protection"
     ],
-    "reasoning": "The trip to Goa (a coastal destination) implies a beach vacation. Tropical weather is typical for Goa, requiring light packing. Activities focus on beach-related pursuits."
+    "reasoning": "The destination Goa is a coastal city known for beach vacations. The tropical weather requires light packing. Activities include beach-related pursuits and local exploration. Recommendations focus on sun protection and enjoying local culture."
 }

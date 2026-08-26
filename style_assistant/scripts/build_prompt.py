@@ -1,6 +1,6 @@
 # style_assistant/scripts/build_prompt.py
 import json
-from metadata.styles import STYLE_PROFILES
+from recommendation_engine.metadata.styles import STYLE_PROFILES
 
 def build_prompt_from_candidates(candidate_json):
     """

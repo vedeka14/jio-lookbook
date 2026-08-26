@@ -2,9 +2,9 @@ import json
 import sys
 import logging
 
-from candidate_builder.filters import filter_by_gender, filter_by_weather, filter_by_occasion
-from candidate_builder.scorer import score_and_sort_candidates
-from candidate_builder.selector import build_candidate_json
+from recommendation_engine.candidate_builder.filters import filter_by_gender, filter_by_weather, filter_by_occasion
+from recommendation_engine.candidate_builder.scorer import score_and_sort_candidates
+from recommendation_engine.candidate_builder.selector import build_candidate_json
 
 def recommend(wardrobe, trip, silent=False):
     """
@@ -32,7 +32,7 @@ def recommend(wardrobe, trip, silent=False):
     }
     occ_key = occ_key_map.get(occasion_str, "default")
     
-    from metadata.outfit_presets import OUTFIT_PRESETS
+    from recommendation_engine.metadata.outfit_presets import OUTFIT_PRESETS
     preset_template = None
     if occ_key in OUTFIT_PRESETS:
         if gender_str in OUTFIT_PRESETS[occ_key]:

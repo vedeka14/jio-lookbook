@@ -251,7 +251,7 @@ with tab1:
         }
         occ_key = occ_key_map.get(occasion, "default")
         
-        from metadata.outfit_presets import OUTFIT_PRESETS
+        from recommendation_engine.metadata.outfit_presets import OUTFIT_PRESETS
         vibe_options = []
         if occ_key in OUTFIT_PRESETS:
             gender_key = gender.lower()
@@ -396,7 +396,7 @@ with tab1:
         elif use_default:
             import json
             from fashion_ai.wardrobeinference.config import WARDROBE_FILE
-            with open(WARDROBE_FILE, "r", encoding="utf-8") as f:
+            with open(WARDROBE_FILE, "r", encoding="utf-8-sig") as f:
                 st.session_state.wardrobe = json.load(f)
         else:
             st.session_state.wardrobe = []
@@ -460,18 +460,21 @@ with tab2:
             cols = st.columns(4)
             for i, item in enumerate(st.session_state.wardrobe):
                 with cols[i % 4]:
-                    crop_path = COLOR_CROPS_DIR / item.get("crop", "")
-                    photo_path = PHOTOS_DIR / item.get("image", "")
+                    crop_val = item.get("crop")
+                    image_val = item.get("image")
                     
-                    # Fallback for LLaVA which doesn't create crops
-                    display_path = crop_path if crop_path.exists() else photo_path
-
+                    display_path = None
+                    if crop_val and (COLOR_CROPS_DIR / crop_val).is_file():
+                        display_path = COLOR_CROPS_DIR / crop_val
+                    elif image_val and (PHOTOS_DIR / image_val).is_file():
+                        display_path = PHOTOS_DIR / image_val
+                    
                     with st.container(border=True):
-                        if display_path.exists():
+                        if display_path:
                             st.image(str(display_path), width=150)
-                            st.caption(f"**👕 {item['color']} {item['category'].title()}**\n\nConfidence {item['confidence']*100:.0f}%")
+                            st.caption(f"**👕 {item.get('color', '')} {item.get('category', '').title()}**\n\nConfidence {item.get('confidence', 0)*100:.0f}%")
                         else:
-                            st.write(f"Missing image: {item.get('image')}")
+                            st.write(f"Missing image: {image_val}")
     else:
         st.info("Run the Analysis in the Overview tab first.")
 
@@ -528,7 +531,7 @@ with tab3:
                     vibe_str = vibe # this captures both standard vibes and Destination Types for Travel
                     
                     try:
-                        from metadata.strict_templates import STRICT_TEMPLATES
+                        from recommendation_engine.metadata.strict_templates import STRICT_TEMPLATES
                         if occ_str in STRICT_TEMPLATES and gender_str in STRICT_TEMPLATES[occ_str]:
                             if vibe_str in STRICT_TEMPLATES[occ_str][gender_str]:
                                 strict_look = STRICT_TEMPLATES[occ_str][gender_str][vibe_str]

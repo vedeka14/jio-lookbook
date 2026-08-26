@@ -1,7 +1,7 @@
 # style_assistant/scripts/outfit_validator.py
 import json
 import logging
-from metadata.compatibility import COMPATIBILITY_RULES
+from recommendation_engine.metadata.compatibility import COMPATIBILITY_RULES
 
 def validate_outfit_json(llm_response_text, candidate_json):
     """
