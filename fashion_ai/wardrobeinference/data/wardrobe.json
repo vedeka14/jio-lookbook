@@ -1,225 +1,553 @@
-﻿[
+[
     {
-        "image": "ds04_mixed_ind_west_clothing__t_000001.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.8
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000001.jpg",
-        "category": "shalwar",
-        "color": "Cream",
-        "confidence": 0.49
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
-        "category": "dupatta",
-        "color": "Lavender",
-        "confidence": 0.348
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
-        "category": "saree",
-        "color": "Lavender",
-        "confidence": 0.706
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
-        "category": "lungi",
-        "color": "Lavender",
-        "confidence": 0.291
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
-        "category": "shalwar",
-        "color": "Lavender",
-        "confidence": 0.292
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000009.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.773
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000009.jpg",
-        "category": "shalwar",
-        "color": "Beige",
-        "confidence": 0.457
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "shirt",
-        "color": "Beige",
-        "confidence": 0.271
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "kameez",
-        "color": "Beige",
-        "confidence": 0.272
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "kameez",
-        "color": "Olive",
-        "confidence": 0.255
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "dress",
-        "color": "Olive",
-        "confidence": 0.46
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.511
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "handbag",
-        "color": "Beige",
-        "confidence": 0.708
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "sharara",
-        "color": "Beige",
-        "confidence": 0.296
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "skirt",
-        "color": "Beige",
-        "confidence": 0.508
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "shoes",
-        "color": "Beige",
-        "confidence": 0.254
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
-        "category": "shirt",
-        "color": "Olive",
-        "confidence": 0.315
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
-        "category": "shirt",
-        "color": "Mustard",
-        "confidence": 0.252
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.296
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
-        "category": "dress",
-        "color": "Mustard",
-        "confidence": 0.405
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000013.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.636
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000018.jpg",
-        "category": "saree",
+        "image": "100.png",
+        "category": "Skirt",
         "color": "Brown",
-        "confidence": 0.469
+        "confidence": 0.99,
+        "crop": "100.png",
+        "style": "casual/street",
+        "occasion": [
+            "travel",
+            "sightseeing",
+            "casual day",
+            "cafe"
+        ],
+        "weather": "all",
+        "fit": "regular"
     },
     {
-        "image": "ds05_saree_detection_v1i_yolo_t_000018.jpg",
-        "category": "shalwar",
-        "color": "Brown",
-        "confidence": 0.272
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000019.jpg",
-        "category": "dress",
-        "color": "Teal",
-        "confidence": 0.636
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000019.jpg",
-        "category": "dress",
-        "color": "Teal",
-        "confidence": 0.355
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000022.jpg",
-        "category": "dress",
+        "image": "100.png",
+        "category": "Top",
         "color": "Black",
-        "confidence": 0.379
+        "confidence": 0.99,
+        "crop": "100.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
     },
     {
-        "image": "ds07_shirt_v1i_yolo26_t_000013.jpg",
-        "category": "shirt",
-        "color": "Lavender",
-        "confidence": 0.252
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000013.jpg",
-        "category": "shirt",
-        "color": "Sky Blue",
-        "confidence": 0.275
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000014.jpg",
-        "category": "shirt",
-        "color": "Teal",
-        "confidence": 0.407
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
-        "category": "kurta",
-        "color": "Beige",
-        "confidence": 0.296
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
-        "category": "shirt",
-        "color": "Beige",
-        "confidence": 0.274
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
-        "category": "shorts",
-        "color": "Teal",
-        "confidence": 0.498
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
-        "category": "shorts",
-        "color": "Teal",
-        "confidence": 0.514
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000016.jpg",
-        "category": "shirt",
+        "image": "100.png",
+        "category": "Shoe",
         "color": "Black",
-        "confidence": 0.393
+        "confidence": 0.99,
+        "crop": "100.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
     },
     {
-        "image": "ds07_shirt_v1i_yolo26_t_000016.jpg",
-        "category": "pants",
-        "color": "Grey",
-        "confidence": 0.301
+        "image": "101.png",
+        "category": "Pants",
+        "color": "Black",
+        "confidence": 0.99,
+        "crop": "101.png",
+        "style": "versatile/smart-casual",
+        "occasion": [
+            "office",
+            "dinner",
+            "business",
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "tailored"
     },
     {
-        "image": "ds07_shirt_v1i_yolo26_t_000033.jpg",
-        "category": "shirt",
-        "color": "Beige",
-        "confidence": 0.275
+        "image": "101.png",
+        "category": "Skirt",
+        "color": "Black",
+        "confidence": 0.99,
+        "crop": "101.png",
+        "style": "casual/street",
+        "occasion": [
+            "travel",
+            "sightseeing",
+            "casual day",
+            "cafe"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "101.png",
+        "category": "Shoes",
+        "color": "Red",
+        "confidence": 0.99,
+        "crop": "101.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "103.png",
+        "category": "Pants",
+        "color": "Tan",
+        "confidence": 0.99,
+        "crop": "103.png",
+        "style": "versatile/smart-casual",
+        "occasion": [
+            "office",
+            "dinner",
+            "business",
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "tailored"
+    },
+    {
+        "image": "103.png",
+        "category": "Shirt",
+        "color": "Blue",
+        "confidence": 0.99,
+        "crop": "103.png",
+        "style": "versatile/smart-casual",
+        "occasion": [
+            "office",
+            "dinner",
+            "business",
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "tailored"
+    },
+    {
+        "image": "103.png",
+        "category": "Belt",
+        "color": "Black",
+        "confidence": 0.99,
+        "crop": "103.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "103.png",
+        "category": "Shoes",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "103.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "107.png",
+        "category": "Dress",
+        "color": "Red",
+        "confidence": 0.99,
+        "crop": "107.png",
+        "style": "elegant/chic",
+        "occasion": [
+            "dinner",
+            "party",
+            "date",
+            "resort"
+        ],
+        "weather": "warm",
+        "fit": "flowy"
+    },
+    {
+        "image": "26.png",
+        "category": "Shirt",
+        "color": "Hawaiian Style With Yellow And Orange Patterns",
+        "confidence": 0.99,
+        "crop": "26.png",
+        "style": "versatile/smart-casual",
+        "occasion": [
+            "office",
+            "dinner",
+            "business",
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "tailored"
+    },
+    {
+        "image": "26.png",
+        "category": "Shorts",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "26.png",
+        "style": "casual/street",
+        "occasion": [
+            "travel",
+            "sightseeing",
+            "casual day",
+            "cafe"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "39.png",
+        "category": "Pants",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "39.png",
+        "style": "versatile/smart-casual",
+        "occasion": [
+            "office",
+            "dinner",
+            "business",
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "tailored"
+    },
+    {
+        "image": "39.png",
+        "category": "Shirt",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "39.png",
+        "style": "versatile/smart-casual",
+        "occasion": [
+            "office",
+            "dinner",
+            "business",
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "tailored"
+    },
+    {
+        "image": "41.png",
+        "category": "Dress",
+        "color": "Yellow",
+        "confidence": 0.99,
+        "crop": "41.png",
+        "style": "elegant/chic",
+        "occasion": [
+            "dinner",
+            "party",
+            "date",
+            "resort"
+        ],
+        "weather": "warm",
+        "fit": "flowy"
+    },
+    {
+        "image": "45.png",
+        "category": "Dress",
+        "color": "Floral",
+        "confidence": 0.99,
+        "crop": "45.png",
+        "style": "elegant/chic",
+        "occasion": [
+            "dinner",
+            "party",
+            "date",
+            "resort"
+        ],
+        "weather": "warm",
+        "fit": "flowy"
+    },
+    {
+        "image": "46.png",
+        "category": "Bra",
+        "color": "No Bra",
+        "confidence": 0.99,
+        "crop": "46.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "46.png",
+        "category": "Top",
+        "color": "Pink",
+        "confidence": 0.99,
+        "crop": "46.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "46.png",
+        "category": "Bottom",
+        "color": "Pink",
+        "confidence": 0.99,
+        "crop": "46.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "46.png",
+        "category": "Skirt",
+        "color": "Pink",
+        "confidence": 0.99,
+        "crop": "46.png",
+        "style": "casual/street",
+        "occasion": [
+            "travel",
+            "sightseeing",
+            "casual day",
+            "cafe"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "46.png",
+        "category": "Cape",
+        "color": "Pink",
+        "confidence": 0.99,
+        "crop": "46.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "46.png",
+        "category": "Jewelry",
+        "color": "No Jewelry",
+        "confidence": 0.99,
+        "crop": "46.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "53.png",
+        "category": "Dress",
+        "color": "Olive",
+        "confidence": 0.99,
+        "crop": "53.png",
+        "style": "elegant/chic",
+        "occasion": [
+            "dinner",
+            "party",
+            "date",
+            "resort"
+        ],
+        "weather": "warm",
+        "fit": "flowy"
+    },
+    {
+        "image": "54.png",
+        "category": "Sunglasses",
+        "color": "Black",
+        "confidence": 0.99,
+        "crop": "54.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "54.png",
+        "category": "Top",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "54.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "54.png",
+        "category": "Jumpsuit",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "54.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "54.png",
+        "category": "Pants",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "54.png",
+        "style": "versatile/smart-casual",
+        "occasion": [
+            "office",
+            "dinner",
+            "business",
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "tailored"
+    },
+    {
+        "image": "54.png",
+        "category": "Blouse",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "54.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "64.png",
+        "category": "Off-The-Shoulder Top",
+        "color": "Multicolored Floral Pattern",
+        "confidence": 0.99,
+        "crop": "64.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "64.png",
+        "category": "High-Waisted Shorts",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "64.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "64.png",
+        "category": "Necklace",
+        "color": "Gold",
+        "confidence": 0.99,
+        "crop": "64.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "68.png",
+        "category": "T-Shirt",
+        "color": "Blue",
+        "confidence": 0.99,
+        "crop": "68.png",
+        "style": "casual/street",
+        "occasion": [
+            "travel",
+            "sightseeing",
+            "casual day",
+            "cafe"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "68.png",
+        "category": "Jeans",
+        "color": "Light Blue",
+        "confidence": 0.99,
+        "crop": "68.png",
+        "style": "casual/street",
+        "occasion": [
+            "travel",
+            "sightseeing",
+            "casual day",
+            "cafe"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "68.png",
+        "category": "Shorts",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "68.png",
+        "style": "casual/street",
+        "occasion": [
+            "travel",
+            "sightseeing",
+            "casual day",
+            "cafe"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "68.png",
+        "category": "Shirt",
+        "color": "Black",
+        "confidence": 0.99,
+        "crop": "68.png",
+        "style": "versatile/smart-casual",
+        "occasion": [
+            "office",
+            "dinner",
+            "business",
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "tailored"
+    },
+    {
+        "image": "68.png",
+        "category": "Earrings",
+        "color": "Gold",
+        "confidence": 0.99,
+        "crop": "68.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
+    },
+    {
+        "image": "68.png",
+        "category": "Shoes",
+        "color": "Black",
+        "confidence": 0.99,
+        "crop": "68.png",
+        "style": "versatile",
+        "occasion": [
+            "casual day"
+        ],
+        "weather": "all",
+        "fit": "regular"
     }
 ]
-

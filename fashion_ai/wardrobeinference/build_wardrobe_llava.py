@@ -60,12 +60,27 @@ def build_wardrobe(silent=False):
         print("="*60)
         
     wardrobe_items = []
+    if WARDROBE_FILE.exists():
+        try:
+            with open(WARDROBE_FILE, "r", encoding="utf-8-sig") as f:
+                wardrobe_items = json.load(f)
+            if not silent:
+                print(f"Loaded {len(wardrobe_items)} existing items from database. New scans will be appended.")
+        except Exception as e:
+            print(f"Could not load existing wardrobe: {e}")
     
     if not PHOTOS_DIR.exists():
         return wardrobe_items
         
+    existing_images = {item.get("image") for item in wardrobe_items if item.get("image")}
+    
     for image_name in os.listdir(PHOTOS_DIR):
         if not image_name.lower().endswith((".jpg", ".jpeg", ".png")):
+            continue
+            
+        if image_name in existing_images:
+            if not silent:
+                print(f"Skipping {image_name} (already in database)...")
             continue
             
         img_path = PHOTOS_DIR / image_name
@@ -128,3 +143,6 @@ def build_wardrobe(silent=False):
 if __name__ == "__main__":
     build_wardrobe()
 
+
+if __name__ == '__main__':
+    build_wardrobe(silent=False)
