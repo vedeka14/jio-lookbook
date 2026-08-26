@@ -4,33 +4,35 @@ import ollama
 import requests
 import base64
 
+import easyocr
+import io
+
 def extract_destination_from_ticket(image_bytes: bytes) -> str:
-    """Uses LLaVA vision model to extract the destination city/location from an image."""
-    logging.info("[TripDetector] Running LLaVA OCR on uploaded ticket...")
-    img_b64 = base64.b64encode(image_bytes).decode("utf-8")
-    
-    payload = {
-        "model": "llava",
-        "messages": [
-            {
-                "role": "user",
-                "content": "Analyze this travel ticket/boarding pass. What is the final destination city or location? Output ONLY the name of the destination city, nothing else. If you cannot find one, output 'Unknown'.",
-                "images": [img_b64]
-            }
-        ],
-        "stream": False
-    }
-    
+    """Uses EasyOCR to read text, then Mistral to extract destination."""
+    logging.info("[TripDetector] Running EasyOCR on uploaded ticket...")
     try:
-        response = requests.post("http://localhost:11434/api/chat", json=payload, timeout=120)
-        content = response.json().get("message", {}).get("content", "").strip()
-        # Clean up any potential markdown or extra punctuation
-        content = content.replace("'", "").replace('"', "").replace("\n", " ").strip()
+        reader = easyocr.Reader(["en"], verbose=False)
+        result = reader.readtext(image_bytes)
+        
+        # Join all extracted text into one giant string
+        raw_text = " ".join([text for _, text, _ in result])
+        
+        # Ask Mistral to pull the destination from the raw text
+        prompt = (
+            f"Here is raw text extracted from a flight ticket/boarding pass: {raw_text}\n\n"
+            "Look carefully for the 'To', 'Arrival', or 'Destination' city. DO NOT output the departure or 'From' city. "
+            "What is the final arrival destination city? Output ONLY the name of the destination city (e.g. 'Goa', 'Paris', 'Tokyo'), nothing else. If you cannot find one, output 'Unknown'."
+        )
+        
+        response = ollama.chat(model="mistral", messages=[{"role": "user", "content": prompt}])
+        content = response["message"]["content"].strip().replace("'", "").replace('"', "").replace("\n", " ").strip()
+        
         if content.lower() == "unknown" or len(content) > 30:
             return ""
         return content
+        
     except Exception as e:
-        logging.error(f"[TripDetector] LLaVA OCR failed: {e}")
+        logging.error(f"[TripDetector] EasyOCR/Mistral pipeline failed: {e}")
         return ""
 
 def detect_trip_context(destination: str, model="mistral") -> dict:

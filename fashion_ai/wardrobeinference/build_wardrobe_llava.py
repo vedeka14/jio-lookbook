@@ -75,12 +75,32 @@ def build_wardrobe(silent=False):
         img_b64 = get_base64_image(img_path)
         items = ask_llava(img_b64)
         
+        seen_cats = set()
+        has_full_body = any(i.get("category", "").lower() in ["dress", "swimsuit", "bikini", "gown", "kurta", "saree"] for i in items)
+        
         for item in items:
-            cat = item.get("category", "Unknown")
-            col = item.get("color", "Unknown")
+            cat = item.get("category", "Unknown").title()
+            col = item.get("color", "Unknown").title()
+            
             if cat == "Unknown": continue
             
-            meta = enrich_metadata(cat)
+            cat_lower = cat.lower()
+            
+            # 1. Deduplicate
+            if cat_lower in seen_cats:
+                continue
+                
+            # 2. Filter out heavy layer hallucinations for beach wear
+            if cat_lower in ["blazer", "jacket", "coat"]:
+                continue
+                
+            # 3. Filter out shorts/pants if wearing a full body outfit (Dress/Swimsuit/Saree)
+            if has_full_body and cat_lower in ["shorts", "pants", "jeans", "trousers"]:
+                continue
+                
+            seen_cats.add(cat_lower)
+            meta = enrich_metadata(cat_lower)
+            
             wardrobe_items.append({
                 "image": image_name,
                 "category": cat,

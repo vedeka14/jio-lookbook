@@ -32,72 +32,144 @@ st.set_page_config(
 # Custom Premium CSS Injection
 st.markdown("""
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+/* Global Font & Text */
 html, body, [class*="css"] {
-    font-family: 'Outfit', sans-serif !important;
+    font-family: 'Plus Jakarta Sans', sans-serif !important;
+    color: #1e293b !important;
 }
 
-/* Global Scale Down */
+/* Global Scale */
 html {
-    font-size: 90% !important;
+    font-size: 95% !important;
 }
 
+/* Bright & Clean App Background */
 .stApp {
-    background: linear-gradient(135deg, #020617 0%, #0f172a 100%);
-    color: #f8fafc;
+    background: #f8fafc;
+    background-image: radial-gradient(circle at 100% 0%, #ffffff 0%, #f1f5f9 100%);
+    color: #0f172a;
 }
 
-/* Gradient Title */
+/* Vibrant Gradient Title */
 h1 {
-    background: linear-gradient(to right, #38bdf8, #818cf8, #c084fc);
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    font-weight: 700 !important;
+    font-weight: 800 !important;
     padding-bottom: 10px;
 }
 
-/* Glassmorphism for Alerts/Info */
-[data-testid="stAlert"] {
-    background: rgba(255, 255, 255, 0.03) !important;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    color: #e2e8f0;
+/* Headers */
+h2, h3, h4, label {
+    color: #334155 !important;
+    font-weight: 700 !important;
 }
 
-/* File Uploaders */
+/* Beautiful White Cards for Info/Expanders */
+[data-testid="stAlert"], [data-testid="stExpander"] {
+    background: #ffffff !important;
+    border: 1px solid #e2e8f0;
+    border-radius: 16px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+    color: #334155 !important;
+}
+
+/* Aesthetic File Uploaders */
 [data-testid="stFileUploader"] {
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px dashed rgba(255, 255, 255, 0.15);
-    border-radius: 12px;
-    padding: 10px;
+    background: #ffffff;
+    border: 2px dashed #cbd5e1;
+    border-radius: 16px;
+    padding: 15px;
     transition: all 0.3s ease;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
 }
 [data-testid="stFileUploader"]:hover {
-    border-color: #818cf8;
-    background: rgba(255, 255, 255, 0.05);
+    border-color: #FF6B6B;
+    background: #fff5f5;
+    transform: translateY(-2px);
 }
 
-/* Button */
+/* Pinterest Style Image Gallery */
+.stImage > img {
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.stImage > img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.15);
+    cursor: pointer;
+}
+
+/* Vibrant Action Buttons */
 .stButton > button {
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%) !important;
+    background: linear-gradient(135deg, #FF6B6B 0%, #FF8E53 100%) !important;
     color: white !important;
+    border-radius: 30px !important;
     border: none !important;
-    border-radius: 8px !important;
-    padding: 12px 24px !important;
+    padding: 0.6rem 2.5rem !important;
     font-weight: 600 !important;
     letter-spacing: 0.5px;
-    transition: all 0.3s ease !important;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+    box-shadow: 0 4px 14px rgba(255, 107, 107, 0.3) !important;
 }
 .stButton > button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 20px -10px rgba(168, 85, 247, 0.8) !important;
+    transform: translateY(-3px) !important;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.5) !important;
 }
 
-/* Sliders */
-.stSlider div[data-testid="stThumbValue"] {
-    color: #c084fc !important;
+/* Beautiful Floating Metric Cards */
+div[data-testid="stMetric"] {
+    background: #ffffff;
+    border: 1px solid #f1f5f9;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+div[data-testid="stMetric"]:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+div[data-testid="stMetricValue"] {
+    color: #0f172a !important;
+    font-weight: 800 !important;
+}
+
+/* Clean Input Fields */
+.stTextInput input, .stSelectbox > div[data-baseweb="select"] {
+    background-color: #ffffff !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 12px !important;
+    color: #1e293b !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02) !important;
+}
+.stTextInput input:focus, .stSelectbox > div[data-baseweb="select"]:focus-within {
+    border-color: #FF6B6B !important;
+    box-shadow: 0 0 0 1px #FF6B6B !important;
+}
+
+/* Custom Tabs */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 15px;
+    background: transparent;
+}
+.stTabs [data-baseweb="tab"] {
+    height: 50px;
+    border-radius: 12px 12px 0 0;
+    padding: 10px 25px;
+    font-weight: 600;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-bottom: none;
+    color: #64748b;
+}
+.stTabs [aria-selected="true"] {
+    background: #FF6B6B !important;
+    color: white !important;
+    border-color: #FF6B6B !important;
 }
 
 /* Hide Streamlit elements */
@@ -197,24 +269,36 @@ with tab1:
             dyn_context["trip"] = "Travel"
             
             # Destination Input and Auto-Detect
-            dest = st.text_input("Destination", value=st.session_state.get("last_destination", "Zurich"))
-            if dest != st.session_state.get("last_destination"):
-                st.session_state["last_destination"] = dest
+            if "dest_input_val" not in st.session_state:
+                st.session_state["dest_input_val"] = "Zurich"
                 
-            ticket = st.file_uploader("📄 Travel Ticket (Optional OCR extraction)", type=["jpg", "jpeg", "png", "pdf"])
+            dest = st.text_input("Destination", key="dest_input_val")
+            dyn_context["destination"] = dest
                 
+            ticket = st.file_uploader("📄 Travel Ticket (Optional OCR extraction)", type=["jpg", "jpeg", "png", "pdf"], key="ticket_upload")
+            
             if st.button("✨ Auto-Detect Trip Context"):
-                with st.spinner("Analyzing destination..."):
-                    from style_assistant.scripts.trip_detector import detect_trip_context, extract_destination_from_ticket
+                st.session_state["run_auto_detect_flag"] = True
+
+            if st.session_state.get("run_auto_detect_flag"):
+                st.session_state["run_auto_detect_flag"] = False
+                with st.spinner("🤖 AI is analyzing your ticket and trip context... (This takes about 10-15 seconds)"):
+                    ticket_file = st.session_state.get("ticket_upload")
+                    current_dest = st.session_state.get("dest_input_val", "Zurich")
                     
-                    # If a ticket was uploaded, run OCR first
-                    if ticket is not None:
-                        ocr_dest = extract_destination_from_ticket(ticket.getvalue())
-                        if ocr_dest:
-                            dest = ocr_dest
-                            st.session_state["last_destination"] = dest
+                    if ticket_file is not None:
+                        try:
+                            ticket_bytes = ticket_file.getvalue()
+                            from style_assistant.scripts.trip_detector import extract_destination_from_ticket
+                            ocr_dest = extract_destination_from_ticket(ticket_bytes)
+                            if ocr_dest:
+                                current_dest = ocr_dest
+                                st.session_state["dest_input_val"] = ocr_dest
+                        except Exception:
+                            st.warning("⚠️ Please re-upload your ticket image. The file was cleared from memory.")
                     
-                    res = detect_trip_context(dest)
+                    from style_assistant.scripts.trip_detector import detect_trip_context
+                    res = detect_trip_context(current_dest)
                     st.session_state["detected_type"] = res.get("destination_type", "City")
                     st.session_state["detected_weather"] = res.get("weather", "Pleasant")
                 st.rerun()
@@ -271,8 +355,6 @@ with tab1:
             with open(TICKET_IMAGE, "wb") as f:
                 f.write(ticket.getbuffer())
         if photos:
-            if PHOTOS_DIR.exists():
-                shutil.rmtree(PHOTOS_DIR)
             PHOTOS_DIR.mkdir(parents=True, exist_ok=True)
             for photo in photos:
                 photo_path = PHOTOS_DIR / photo.name
@@ -330,14 +412,14 @@ with tab1:
         progress_bar.empty()
         status_box.empty()
             
-    if st.session_state.trip_context:
+    if st.session_state.rec_data:
         st.success("Analysis complete! Head over to the **✨ AI Stylist** tab to see your outfits.")
         
         with st.expander("🔒 Privacy Layer", expanded=False):
-            st.success("✓ Photos are processed locally and NEVER shared.")
+            st.success("✅ Photos are processed locally and NEVER shared.")
             st.write("Instead of sending your personal photos to a store, we search their catalog using these text tags:")
             
-            for query in st.session_state.rec_data['ajio_query']:
+            for query in st.session_state.rec_data.get('ajio_query', []):
                 category = query.get('category', '').title()
                 colors = ", ".join(query.get('preferred_colors', []))
                 st.markdown(f"- **Search:** `{colors} {category}`")
@@ -360,11 +442,11 @@ with tab2:
         others = 0
         
         for item in st.session_state.wardrobe:
-            cat = item['category'].lower()
-            if cat in tops_cats: tops += 1
-            elif cat in bottoms_cats: bottoms += 1
-            elif cat in trad_cats: trad += 1
-            elif cat in footwear_cats: foot += 1
+            cat = item.get('category', '').lower()
+            if any(t in cat for t in tops_cats): tops += 1
+            elif any(t in cat for t in bottoms_cats): bottoms += 1
+            elif any(t in cat for t in trad_cats): trad += 1
+            elif any(t in cat for t in footwear_cats): foot += 1
             else: others += 1
             
         m1, m2, m3, m4 = st.columns(4)
@@ -461,10 +543,13 @@ with tab3:
                     for chunk in stream_ollama("mistral", st.session_state.messages):
                         raw_json_response += chunk
                         
-                    validated = validate_outfit_json(raw_json_response, st.session_state.rec_data)
-                    ai_markdown = format_outfit_markdown(validated)
+                    if "**Error connecting to Ollama:**" in raw_json_response:
+                        ai_markdown = raw_json_response
+                    else:
+                        validated = validate_outfit_json(raw_json_response, st.session_state.rec_data)
+                        ai_markdown = format_outfit_markdown(validated)
                     
-                    if not has_cands:
+                    if not has_cands and "**Error" not in raw_json_response:
                         ai_markdown = "⚠️ **Note: Since your wardrobe is empty, the AI has acted as a personal shopper and built a completely new outfit for you from scratch!**\n\n" + ai_markdown
                     
                     # 3. Combine if strict exists
@@ -505,8 +590,11 @@ with tab3:
                     for chunk in stream_ollama("mistral", st.session_state.messages):
                         raw_json_response += chunk
                         
-                    validated = validate_outfit_json(raw_json_response, st.session_state.rec_data)
-                    markdown_out = format_outfit_markdown(validated)
+                    if "**Error connecting to Ollama:**" in raw_json_response:
+                        markdown_out = raw_json_response
+                    else:
+                        validated = validate_outfit_json(raw_json_response, st.session_state.rec_data)
+                        markdown_out = format_outfit_markdown(validated)
                     
                 st.markdown(markdown_out)
             st.session_state.messages.append({"role": "assistant", "content": markdown_out, "raw_json": raw_json_response})
