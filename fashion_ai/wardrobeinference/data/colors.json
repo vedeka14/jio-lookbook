@@ -1,0 +1,691 @@
+[
+    {
+        "image": "auto_img_004.png",
+        "category": "design sherwani",
+        "color": "Brown",
+        "confidence": 0.703,
+        "crop": "auto_img_004_design sherwani_001.jpg",
+        "bbox": [
+            53,
+            1001,
+            261,
+            1393
+        ]
+    },
+    {
+        "image": "auto_img_008.png",
+        "category": "shirt",
+        "color": "White",
+        "confidence": 0.521,
+        "crop": "auto_img_008_shirt_001.jpg",
+        "bbox": [
+            258,
+            239,
+            566,
+            598
+        ]
+    },
+    {
+        "image": "auto_img_011.jpg",
+        "category": "design sherwani",
+        "color": "Cream",
+        "confidence": 0.593,
+        "crop": "auto_img_011_design sherwani_001.jpg",
+        "bbox": [
+            371,
+            297,
+            494,
+            600
+        ]
+    },
+    {
+        "image": "auto_img_013.png",
+        "category": "handbag",
+        "color": "Sky Blue",
+        "confidence": 0.572,
+        "crop": "auto_img_013_handbag_001.jpg",
+        "bbox": [
+            16,
+            1347,
+            415,
+            1901
+        ]
+    },
+    {
+        "image": "auto_img_017.jpg",
+        "category": "handbag",
+        "color": "Sky Blue",
+        "confidence": 0.555,
+        "crop": "auto_img_017_handbag_001.jpg",
+        "bbox": [
+            0,
+            1230,
+            229,
+            1487
+        ]
+    },
+    {
+        "image": "auto_img_017.jpg",
+        "category": "t-shirt",
+        "color": "Maroon",
+        "confidence": 0.531,
+        "crop": "auto_img_017_t-shirt_002.jpg",
+        "bbox": [
+            325,
+            195,
+            445,
+            402
+        ]
+    },
+    {
+        "image": "auto_img_018.png",
+        "category": "jacket",
+        "color": "Black",
+        "confidence": 0.512,
+        "crop": "auto_img_018_jacket_001.jpg",
+        "bbox": [
+            21,
+            977,
+            317,
+            1304
+        ]
+    },
+    {
+        "image": "auto_img_020.jpg",
+        "category": "t-shirt",
+        "color": "Sky Blue",
+        "confidence": 0.702,
+        "crop": "auto_img_020_t-shirt_001.jpg",
+        "bbox": [
+            831,
+            0,
+            1065,
+            212
+        ]
+    },
+    {
+        "image": "auto_img_020.jpg",
+        "category": "shirt",
+        "color": "Cream",
+        "confidence": 0.545,
+        "crop": "auto_img_020_shirt_002.jpg",
+        "bbox": [
+            908,
+            1057,
+            1069,
+            1331
+        ]
+    },
+    {
+        "image": "auto_img_020.jpg",
+        "category": "shirt",
+        "color": "White",
+        "confidence": 0.529,
+        "crop": "auto_img_020_shirt_003.jpg",
+        "bbox": [
+            0,
+            1048,
+            180,
+            1319
+        ]
+    },
+    {
+        "image": "auto_img_023.jpg",
+        "category": "plain sherwani",
+        "color": "Black",
+        "confidence": 0.711,
+        "crop": "auto_img_023_plain sherwani_001.jpg",
+        "bbox": [
+            521,
+            349,
+            1057,
+            1013
+        ]
+    },
+    {
+        "image": "auto_img_024.jpg",
+        "category": "shirt",
+        "color": "White",
+        "confidence": 0.526,
+        "crop": "auto_img_024_shirt_001.jpg",
+        "bbox": [
+            415,
+            243,
+            777,
+            746
+        ]
+    },
+    {
+        "image": "auto_img_025.png",
+        "category": "jacket",
+        "color": "Sky Blue",
+        "confidence": 0.796,
+        "crop": "auto_img_025_jacket_001.jpg",
+        "bbox": [
+            173,
+            31,
+            888,
+            993
+        ]
+    },
+    {
+        "image": "auto_img_026.jpg",
+        "category": "plain sherwani",
+        "color": "Grey",
+        "confidence": 0.884,
+        "crop": "auto_img_026_plain sherwani_001.jpg",
+        "bbox": [
+            458,
+            347,
+            1121,
+            1758
+        ]
+    },
+    {
+        "image": "auto_img_027.jpg",
+        "category": "plain sherwani",
+        "color": "Grey",
+        "confidence": 0.851,
+        "crop": "auto_img_027_plain sherwani_001.jpg",
+        "bbox": [
+            488,
+            341,
+            1018,
+            1472
+        ]
+    },
+    {
+        "image": "auto_img_028.jpg",
+        "category": "plain sherwani",
+        "color": "Grey",
+        "confidence": 0.711,
+        "crop": "auto_img_028_plain sherwani_001.jpg",
+        "bbox": [
+            160,
+            113,
+            340,
+            563
+        ]
+    },
+    {
+        "image": "auto_img_032.jpg",
+        "category": "plain sherwani",
+        "color": "Sky Blue",
+        "confidence": 0.875,
+        "crop": "auto_img_032_plain sherwani_001.jpg",
+        "bbox": [
+            114,
+            109,
+            291,
+            379
+        ]
+    },
+    {
+        "image": "auto_img_033.jpg",
+        "category": "plain sherwani",
+        "color": "Black",
+        "confidence": 0.836,
+        "crop": "auto_img_033_plain sherwani_001.jpg",
+        "bbox": [
+            778,
+            793,
+            1743,
+            2775
+        ]
+    },
+    {
+        "image": "auto_img_034.png",
+        "category": "plain sherwani",
+        "color": "Black",
+        "confidence": 0.867,
+        "crop": "auto_img_034_plain sherwani_001.jpg",
+        "bbox": [
+            239,
+            231,
+            621,
+            1410
+        ]
+    },
+    {
+        "image": "auto_img_036.jpg",
+        "category": "plain sherwani",
+        "color": "Black",
+        "confidence": 0.898,
+        "crop": "auto_img_036_plain sherwani_001.jpg",
+        "bbox": [
+            624,
+            943,
+            1718,
+            2791
+        ]
+    },
+    {
+        "image": "auto_img_037.jpg",
+        "category": "plain sherwani",
+        "color": "Beige",
+        "confidence": 0.539,
+        "crop": "auto_img_037_plain sherwani_001.jpg",
+        "bbox": [
+            510,
+            323,
+            1021,
+            1791
+        ]
+    },
+    {
+        "image": "auto_img_039.jpg",
+        "category": "sherwani",
+        "color": "Cream",
+        "confidence": 0.701,
+        "crop": "auto_img_039_sherwani_001.jpg",
+        "bbox": [
+            170,
+            5,
+            527,
+            1155
+        ]
+    },
+    {
+        "image": "auto_img_040.jpg",
+        "category": "plain sherwani",
+        "color": "Black",
+        "confidence": 0.704,
+        "crop": "auto_img_040_plain sherwani_001.jpg",
+        "bbox": [
+            220,
+            167,
+            511,
+            863
+        ]
+    },
+    {
+        "image": "auto_img_043.jpg",
+        "category": "plain sherwani",
+        "color": "Grey",
+        "confidence": 0.874,
+        "crop": "auto_img_043_plain sherwani_001.jpg",
+        "bbox": [
+            475,
+            318,
+            1024,
+            1811
+        ]
+    },
+    {
+        "image": "auto_img_043.jpg",
+        "category": "plain sherwani",
+        "color": "White",
+        "confidence": 0.743,
+        "crop": "auto_img_043_plain sherwani_002.jpg",
+        "bbox": [
+            476,
+            331,
+            1034,
+            1121
+        ]
+    },
+    {
+        "image": "auto_img_044.jpg",
+        "category": "plain sherwani",
+        "color": "Black",
+        "confidence": 0.907,
+        "crop": "auto_img_044_plain sherwani_001.jpg",
+        "bbox": [
+            220,
+            134,
+            463,
+            634
+        ]
+    },
+    {
+        "image": "auto_img_046.jpg",
+        "category": "jacket",
+        "color": "Black",
+        "confidence": 0.747,
+        "crop": "auto_img_046_jacket_001.jpg",
+        "bbox": [
+            62,
+            82,
+            227,
+            272
+        ]
+    },
+    {
+        "image": "auto_img_053.jpg",
+        "category": "dress",
+        "color": "Pink",
+        "confidence": 0.543,
+        "crop": "auto_img_053_dress_001.jpg",
+        "bbox": [
+            115,
+            116,
+            730,
+            1089
+        ]
+    },
+    {
+        "image": "auto_img_054.jpg",
+        "category": "sherwani",
+        "color": "Coral",
+        "confidence": 0.516,
+        "crop": "auto_img_054_sherwani_001.jpg",
+        "bbox": [
+            237,
+            292,
+            964,
+            1401
+        ]
+    },
+    {
+        "image": "auto_img_055.jpg",
+        "category": "sherwani",
+        "color": "Red",
+        "confidence": 0.512,
+        "crop": "auto_img_055_sherwani_001.jpg",
+        "bbox": [
+            80,
+            322,
+            599,
+            1200
+        ]
+    },
+    {
+        "image": "auto_img_057.jpeg",
+        "category": "design sherwani",
+        "color": "Red",
+        "confidence": 0.544,
+        "crop": "auto_img_057_design sherwani_001.jpg",
+        "bbox": [
+            560,
+            407,
+            858,
+            1474
+        ]
+    },
+    {
+        "image": "auto_img_059.jpeg",
+        "category": "sherwani",
+        "color": "Beige",
+        "confidence": 0.823,
+        "crop": "auto_img_059_sherwani_001.jpg",
+        "bbox": [
+            70,
+            298,
+            964,
+            1350
+        ]
+    },
+    {
+        "image": "auto_img_060.jpg",
+        "category": "sherwani",
+        "color": "Brown",
+        "confidence": 0.608,
+        "crop": "auto_img_060_sherwani_001.jpg",
+        "bbox": [
+            40,
+            129,
+            557,
+            1186
+        ]
+    },
+    {
+        "image": "auto_img_061.jpg",
+        "category": "dress",
+        "color": "Beige",
+        "confidence": 0.888,
+        "crop": "auto_img_061_dress_001.jpg",
+        "bbox": [
+            88,
+            162,
+            634,
+            1081
+        ]
+    },
+    {
+        "image": "auto_img_066.jpg",
+        "category": "dress",
+        "color": "Cream",
+        "confidence": 0.657,
+        "crop": "auto_img_066_dress_001.jpg",
+        "bbox": [
+            173,
+            558,
+            1726,
+            2957
+        ]
+    },
+    {
+        "image": "auto_img_068.jpg",
+        "category": "design sherwani",
+        "color": "Grey",
+        "confidence": 0.697,
+        "crop": "auto_img_068_design sherwani_001.jpg",
+        "bbox": [
+            609,
+            216,
+            843,
+            652
+        ]
+    },
+    {
+        "image": "auto_img_069.jpg",
+        "category": "design sherwani",
+        "color": "Coral",
+        "confidence": 0.737,
+        "crop": "auto_img_069_design sherwani_001.jpg",
+        "bbox": [
+            6,
+            176,
+            230,
+            849
+        ]
+    },
+    {
+        "image": "auto_img_072.jpg",
+        "category": "jacket",
+        "color": "Beige",
+        "confidence": 0.906,
+        "crop": "auto_img_072_jacket_001.jpg",
+        "bbox": [
+            341,
+            182,
+            621,
+            584
+        ]
+    },
+    {
+        "image": "auto_img_072.jpg",
+        "category": "jacket",
+        "color": "Grey",
+        "confidence": 0.888,
+        "crop": "auto_img_072_jacket_002.jpg",
+        "bbox": [
+            597,
+            190,
+            871,
+            583
+        ]
+    },
+    {
+        "image": "auto_img_072.jpg",
+        "category": "jacket",
+        "color": "Maroon",
+        "confidence": 0.836,
+        "crop": "auto_img_072_jacket_003.jpg",
+        "bbox": [
+            803,
+            203,
+            1016,
+            584
+        ]
+    },
+    {
+        "image": "auto_img_072.jpg",
+        "category": "jacket",
+        "color": "Pink",
+        "confidence": 0.824,
+        "crop": "auto_img_072_jacket_004.jpg",
+        "bbox": [
+            81,
+            237,
+            328,
+            551
+        ]
+    },
+    {
+        "image": "auto_img_073.jpg",
+        "category": "jacket",
+        "color": "White",
+        "confidence": 0.838,
+        "crop": "auto_img_073_jacket_001.jpg",
+        "bbox": [
+            491,
+            503,
+            1148,
+            1351
+        ]
+    },
+    {
+        "image": "auto_img_078.jpg",
+        "category": "jacket",
+        "color": "Black",
+        "confidence": 0.837,
+        "crop": "auto_img_078_jacket_001.jpg",
+        "bbox": [
+            397,
+            571,
+            1064,
+            1649
+        ]
+    },
+    {
+        "image": "auto_img_082.jpg",
+        "category": "jacket",
+        "color": "Sky Blue",
+        "confidence": 0.701,
+        "crop": "auto_img_082_jacket_001.jpg",
+        "bbox": [
+            405,
+            569,
+            1113,
+            1360
+        ]
+    },
+    {
+        "image": "auto_img_083.jpg",
+        "category": "jacket",
+        "color": "Sky Blue",
+        "confidence": 0.826,
+        "crop": "auto_img_083_jacket_001.jpg",
+        "bbox": [
+            204,
+            308,
+            620,
+            924
+        ]
+    },
+    {
+        "image": "auto_img_085.jpg",
+        "category": "jacket",
+        "color": "Sky Blue",
+        "confidence": 0.872,
+        "crop": "auto_img_085_jacket_001.jpg",
+        "bbox": [
+            425,
+            484,
+            1132,
+            1436
+        ]
+    },
+    {
+        "image": "auto_img_086.jpg",
+        "category": "jacket",
+        "color": "Coral",
+        "confidence": 0.861,
+        "crop": "auto_img_086_jacket_001.jpg",
+        "bbox": [
+            196,
+            236,
+            608,
+            925
+        ]
+    },
+    {
+        "image": "auto_img_086.jpg",
+        "category": "jacket",
+        "color": "Sky Blue",
+        "confidence": 0.529,
+        "crop": "auto_img_086_jacket_002.jpg",
+        "bbox": [
+            686,
+            394,
+            832,
+            762
+        ]
+    },
+    {
+        "image": "auto_img_087.jpg",
+        "category": "jacket",
+        "color": "Pink",
+        "confidence": 0.586,
+        "crop": "auto_img_087_jacket_001.jpg",
+        "bbox": [
+            384,
+            483,
+            1089,
+            1418
+        ]
+    },
+    {
+        "image": "auto_img_089.jpg",
+        "category": "jacket",
+        "color": "Sky Blue",
+        "confidence": 0.865,
+        "crop": "auto_img_089_jacket_001.jpg",
+        "bbox": [
+            436,
+            454,
+            1113,
+            1802
+        ]
+    },
+    {
+        "image": "auto_img_090.jpg",
+        "category": "jacket",
+        "color": "Coral",
+        "confidence": 0.581,
+        "crop": "auto_img_090_jacket_001.jpg",
+        "bbox": [
+            413,
+            420,
+            1028,
+            1307
+        ]
+    },
+    {
+        "image": "auto_img_093.jpg",
+        "category": "jacket",
+        "color": "Grey",
+        "confidence": 0.789,
+        "crop": "auto_img_093_jacket_001.jpg",
+        "bbox": [
+            2029,
+            716,
+            3472,
+            3505
+        ]
+    },
+    {
+        "image": "auto_img_093.jpg",
+        "category": "jacket",
+        "color": "Red",
+        "confidence": 0.696,
+        "crop": "auto_img_093_jacket_002.jpg",
+        "bbox": [
+            3308,
+            667,
+            4643,
+            3418
+        ]
+    }
+]

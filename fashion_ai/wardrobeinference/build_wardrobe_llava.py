@@ -30,7 +30,7 @@ def ask_llava(img_b64):
         "messages": [
             {
                 "role": "user",
-                "content": "You are a strict fashion AI. Output ONLY a raw JSON array containing a list of clothing items worn in this image. For each item, give the \"category\" (e.g. Jeans, Blazer, Skirt, T-Shirt) and the \"color\". Do not use markdown. Example: [{\"category\": \"Jeans\", \"color\": \"Blue\"}]",
+                "content": "You are a strict fashion AI. Analyze the image and output ONLY a raw JSON array containing a list of clothing items worn. You MUST be able to recognize standard Western wear (e.g. Jeans, Blazer, Skirt, T-Shirt, Shrug) AND Indian/Indo-Western ethnic wear (e.g. Kurta, Saree, Sharara, Jodhpuri Set, Fishtail Lehenga). For each item, give the \"category\" and the \"color\". Do not use markdown. Example: [{\"category\": \"Sharara\", \"color\": \"Pink\"}]",
                 "images": [img_b64]
             }
         ],
@@ -113,10 +113,7 @@ def build_wardrobe(silent=False):
             if cat_lower in seen_cats:
                 continue
                 
-            # 2. Filter out heavy layer hallucinations for beach wear
-            if cat_lower in ["blazer", "jacket", "coat"]:
-                continue
-                
+
             # 3. Filter out shorts/pants if wearing a full body outfit (Dress/Swimsuit/Saree)
             if has_full_body and cat_lower in ["shorts", "pants", "jeans", "trousers"]:
                 continue

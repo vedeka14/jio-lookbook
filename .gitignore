@@ -77,10 +77,9 @@ dist/
 # ==================================================
 # App Database & Uploads
 # ==================================================
-fashion_ai/wardrobeinference/data/photos/
+# We explicitly ALLOW photos/ and wardrobe.json so recruiters can run the app out-of-the-box
 fashion_ai/wardrobeinference/data/crops/
 fashion_ai/wardrobeinference/data/color_crops/
-fashion_ai/wardrobeinference/data/*.json
 style_assistant/data/uploads/
 temp_downloads/
 

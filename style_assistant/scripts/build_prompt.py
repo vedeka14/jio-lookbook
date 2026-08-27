@@ -26,37 +26,14 @@ def build_prompt_from_candidates(candidate_json):
     has_cands = any(len(lst) > 0 for lst in cands.values())
     missing_items = candidate_json.get("missing_items", [])
     
-    parts = []
-    if has_cands:
-        if candidate_json.get("valid_top_bottom_pairs"):
-            parts.append('    "top": "Name of Top"')
-            parts.append('    "bottom": "Name of Bottom"')
-        else:
-            if cands.get("top"):
-                parts.append('    "top": "Name of Top"')
-            if cands.get("bottom"):
-                parts.append('    "bottom": "Name of Bottom"')
-        if cands.get("full_body"):
-            parts.append('    "full_body": "Name of Full Body Item"')
-        if cands.get("outerwear"):
-            parts.append('    "outerwear": "Name of Outerwear"')
-        if cands.get("footwear"):
-            parts.append('    "footwear": "Name of Footwear"')
-        if cands.get("accessory"):
-            parts.append('    "accessory": "Name of Accessory"')
-    else:
-        # If no candidates, force LLM to generate outfit slots for the missing items
-        for m in missing_items:
-            cat_key = m["category"].lower()
-            if "top" in cat_key or "shirt" in cat_key: parts.append('    "top": "Specific Invented Top"')
-            elif "bottom" in cat_key or "jeans" in cat_key or "skirt" in cat_key or "pants" in cat_key: parts.append('    "bottom": "Specific Invented Bottom"')
-            elif "full_body" in cat_key or "dress" in cat_key or "saree" in cat_key or "lehenga" in cat_key: parts.append('    "full_body": "Specific Invented Full Body Item"')
-            elif "jacket" in cat_key or "blazer" in cat_key or "outerwear" in cat_key: parts.append('    "outerwear": "Specific Invented Outerwear"')
-            elif "footwear" in cat_key or "sneakers" in cat_key or "heels" in cat_key or "flats" in cat_key or "sandals" in cat_key: parts.append('    "footwear": "Specific Invented Footwear"')
-            else: parts.append(f'    "accessory": "Specific Invented {m["category"]}"')
-            
-        # Deduplicate keys just in case
-        parts = list(dict.fromkeys(parts))
+    parts = [
+        '    "top": "Name of Top (from candidates, or invent one if missing)"',
+        '    "bottom": "Name of Bottom (from candidates, or invent one if missing)"',
+        '    "full_body": "Name of Full Body Item (optional, use instead of top/bottom)"',
+        '    "outerwear": "Name of Outerwear (optional, from candidates or invent)"',
+        '    "footwear": "Name of Footwear (from candidates, or invent if missing)"',
+        '    "accessory": "Name of Accessory (from candidates, or invent if missing)"'
+    ]
 
     json_format += ",\n".join(parts) + "\n"
     json_format += (
@@ -86,11 +63,11 @@ def build_prompt_from_candidates(candidate_json):
         "You are an expert AI Fashion Stylist.\n"
         "Your job is to select the BEST outfit from a pre-approved list of candidates.\n\n"
         "RULES:\n"
-        "1. If 'candidates' is NOT empty, you MUST ONLY use items from the 'candidates' arrays OR exactly one pair from 'valid_top_bottom_pairs'. If 'candidates' is EMPTY, you must act as a personal shopper and invent an ideal cohesive outfit from scratch using the requested missing items (e.g. 'Red Blouse', 'Black Blazer').\n"
-        "2. You MUST output EXACTLY the keys shown in the JSON OUTPUT FORMAT. DO NOT ADD ANY OTHER KEYS to the 'outfit' object.\n"
-        "3. CRITICAL: If 'candidates' is NOT empty, NEVER invent, hallucinate, or add items that are not in the 'candidates' list. If you do not have a candidate for a slot, DO NOT output a key for it in the 'outfit' object.\n"
+        "1. You MUST build a complete, cohesive outfit containing a Top, Bottom, Footwear, and Accessory (or a Full Body item instead of Top/Bottom).\n"
+        "2. You MUST prioritize using items from the 'candidates' arrays. However, if 'candidates' is missing an item for a required slot (like a top or bottom), you MUST invent an ideal item for that slot to complete the outfit.\n"
+        "3. You MUST output EXACTLY the keys shown in the JSON OUTPUT FORMAT. DO NOT ADD ANY OTHER KEYS to the 'outfit' object.\n"
         "4. AESTHETICS: Do not match the exact same color for top and bottom unless it is a coordinated suit or set. Ensure the outfit is cohesive.\n"
-        "5. CRITICAL: If 'candidates' is NOT empty, NEVER include items from the 'missing_items' array in your 'outfit'. Instead, just list them in the 'missing' array formatted as 'Category: Specific Suggestion' (e.g., 'Footwear: White Sneakers'). If 'candidates' is EMPTY, put your invented items in 'outfit', AND ALSO list them in the 'missing' array formatted as 'Category: Specific Suggestion'.\n"
+        "5. CRITICAL: If you invent any items because they were missing from the candidates, you MUST include them in your 'outfit' AND ALSO list them in the 'missing' array formatted as 'Category: Specific Suggestion' (e.g., 'Footwear: White Sneakers').\n"
         "6. CRITICAL: Do not layer tops and bottoms under a full body outfit.\n"
         "7. You MUST output ONLY valid JSON. Do not include markdown blocks like ```json or any conversational text outside the JSON.\n\n"
         f"{occasion_rules}"
