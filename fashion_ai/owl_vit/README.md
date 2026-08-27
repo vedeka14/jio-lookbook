@@ -1,5 +1,7 @@
 # OWL-ViT Clothing Detection
 
+> **Note**: This pipeline is deprecated and has been replaced by the LLaVA vision engine located in `fashion_ai/wardrobeinference/build_wardrobe_llava.py`.
+
 Detects clothing items from user photos using the pre-trained OWL-ViT object detection model.
 
 ## Features

@@ -37,7 +37,8 @@ def ask_llava(img_b64):
         "stream": False
     }
     try:
-        response = requests.post("http://localhost:11434/api/chat", json=payload)
+        # Increased timeout to 5 minutes because inference is falling back to CPU
+        response = requests.post("http://localhost:11434/api/chat", json=payload, timeout=300)
         content = response.json().get("message", {}).get("content", "")
         content = content.replace("```json", "").replace("```", "").strip()
         try:
@@ -63,7 +64,9 @@ def build_wardrobe(silent=False):
     if WARDROBE_FILE.exists():
         try:
             with open(WARDROBE_FILE, "r", encoding="utf-8-sig") as f:
-                wardrobe_items = json.load(f)
+                loaded_items = json.load(f)
+                # Auto-clean any bogus items that were saved previously
+                wardrobe_items = [i for i in loaded_items if "not applicable" not in i.get("category", "").lower() and "none" not in i.get("category", "").lower()]
             if not silent:
                 print(f"Loaded {len(wardrobe_items)} existing items from database. New scans will be appended.")
         except Exception as e:
@@ -88,7 +91,10 @@ def build_wardrobe(silent=False):
             print(f"Scanning {image_name}...")
             
         img_b64 = get_base64_image(img_path)
-        items = ask_llava(img_b64)
+        raw_items = ask_llava(img_b64)
+        
+        # Guard against hallucinated non-dictionary items (e.g. if the AI returned a list of strings)
+        items = [i for i in raw_items if isinstance(i, dict)] if isinstance(raw_items, list) else []
         
         seen_cats = set()
         has_full_body = any(i.get("category", "").lower() in ["dress", "swimsuit", "bikini", "gown", "kurta", "saree"] for i in items)
@@ -100,6 +106,8 @@ def build_wardrobe(silent=False):
             if cat == "Unknown": continue
             
             cat_lower = cat.lower()
+            if "not applicable" in cat_lower or "none" in cat_lower:
+                continue
             
             # 1. Deduplicate
             if cat_lower in seen_cats:

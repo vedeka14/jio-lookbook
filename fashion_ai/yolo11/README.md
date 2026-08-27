@@ -1,5 +1,7 @@
 # YOLO11 Model Training
 
+> **Note**: This training pipeline is deprecated and has been replaced by the zero-shot LLaVA vision engine located in `fashion_ai/wardrobeinference/build_wardrobe_llava.py`.
+
 This directory contains dataset merging, validation, and training utilities for YOLO11.
 
 ## Features

@@ -82,4 +82,13 @@ fashion_ai/wardrobeinference/data/crops/
 fashion_ai/wardrobeinference/data/color_crops/
 fashion_ai/wardrobeinference/data/*.json
 style_assistant/data/uploads/
-temp_downloads/
+temp_downloads/
+
+# ==================================================
+# Deprecated / Unneeded Scripts
+# ==================================================
+fashion_ai/wardrobeinference/build_wardrobe_yolo.py
+fashion_ai/wardrobeinference/build_wardrobe_owlvit.py
+fashion_ai/wardrobeinference/extract_colors_owlvit.py
+fashion_ai/wardrobeinference/crop_detections.py
+fashion_ai/wardrobeinference/color_detection_lab.py
