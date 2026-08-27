@@ -3,7 +3,8 @@ import sys
 from pathlib import Path
 import os
 import shutil
-import ollama
+import os
+from groq import Groq
 import json
 import time
 
@@ -189,18 +190,29 @@ if "rec_data" not in st.session_state:
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-def stream_ollama(model_name, messages):
+def stream_llm(model_name, messages):
     try:
-        response = ollama.chat(
-            model=model_name,
+        api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+        if not api_key:
+            yield "**Error:** GROQ_API_KEY is missing. Please add it to Streamlit Secrets or your environment variables."
+            return
+
+        client = Groq(api_key=api_key)
+        
+        # Groq uses different model names, map mistral to miqtral-8x7b-32768
+        groq_model = "mixtral-8x7b-32768" 
+        
+        response = client.chat.completions.create(
+            model=groq_model,
             messages=messages,
             stream=True,
-            format="json"
+            response_format={"type": "json_object"}
         )
         for chunk in response:
-            yield chunk['message']['content']
+            if chunk.choices[0].delta.content:
+                yield chunk.choices[0].delta.content
     except Exception as e:
-        yield f"**Error connecting to Ollama:** {str(e)}\n\nPlease ensure Ollama is running locally and the '{model_name}' model is pulled."
+        yield f"**Error connecting to Cloud API:** {str(e)}"
 
 def get_priority_stars(priority):
     p = priority.lower()
@@ -543,10 +555,10 @@ with tab3:
                     cands = st.session_state.rec_data.get("candidates", {})
                     has_cands = any(len(lst) > 0 for lst in cands.values())
                     
-                    for chunk in stream_ollama("mistral", st.session_state.messages):
+                    for chunk in stream_llm("mistral", st.session_state.messages):
                         raw_json_response += chunk
                         
-                    if "**Error connecting to Ollama:**" in raw_json_response:
+                    if "**Error" in raw_json_response:
                         ai_markdown = raw_json_response
                     else:
                         validated = validate_outfit_json(raw_json_response, st.session_state.rec_data)
@@ -590,10 +602,10 @@ with tab3:
             with st.chat_message("assistant"):
                 with st.spinner("Styling outfit..."):
                     raw_json_response = ""
-                    for chunk in stream_ollama("mistral", st.session_state.messages):
+                    for chunk in stream_llm("mistral", st.session_state.messages):
                         raw_json_response += chunk
                         
-                    if "**Error connecting to Ollama:**" in raw_json_response:
+                    if "**Error" in raw_json_response:
                         markdown_out = raw_json_response
                     else:
                         validated = validate_outfit_json(raw_json_response, st.session_state.rec_data)

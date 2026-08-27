@@ -1,14 +1,20 @@
 import json
 import logging
-import ollama
-import requests
-import base64
+import os
+import streamlit as st
+from groq import Groq
 
 import easyocr
 import io
 
+def get_groq_client():
+    api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        return None
+    return Groq(api_key=api_key)
+
 def extract_destination_from_ticket(image_bytes: bytes) -> str:
-    """Uses EasyOCR to read text, then Mistral to extract destination."""
+    """Uses EasyOCR to read text, then Groq to extract destination."""
     logging.info("[TripDetector] Running EasyOCR on uploaded ticket...")
     try:
         reader = easyocr.Reader(["en"], verbose=False)
@@ -17,22 +23,28 @@ def extract_destination_from_ticket(image_bytes: bytes) -> str:
         # Join all extracted text into one giant string
         raw_text = " ".join([text for _, text, _ in result])
         
-        # Ask Mistral to pull the destination from the raw text
+        client = get_groq_client()
+        if not client:
+            return ""
+
         prompt = (
             f"Here is raw text extracted from a flight ticket/boarding pass: {raw_text}\n\n"
             "Look carefully for the 'To', 'Arrival', or 'Destination' city. DO NOT output the departure or 'From' city. "
             "What is the final arrival destination city? Output ONLY the name of the destination city (e.g. 'Goa', 'Paris', 'Tokyo'), nothing else. If you cannot find one, output 'Unknown'."
         )
         
-        response = ollama.chat(model="mistral", messages=[{"role": "user", "content": prompt}])
-        content = response["message"]["content"].strip().replace("'", "").replace('"', "").replace("\n", " ").strip()
+        response = client.chat.completions.create(
+            model="mixtral-8x7b-32768",
+            messages=[{"role": "user", "content": prompt}]
+        )
+        content = response.choices[0].message.content.strip().replace("'", "").replace('"', "").replace("\n", " ").strip()
         
         if content.lower() == "unknown" or len(content) > 30:
             return ""
         return content
         
     except Exception as e:
-        logging.error(f"[TripDetector] EasyOCR/Mistral pipeline failed: {e}")
+        logging.error(f"[TripDetector] EasyOCR/Groq pipeline failed: {e}")
         return ""
 
 def detect_trip_context(destination: str, model="mistral") -> dict:
@@ -55,15 +67,20 @@ def detect_trip_context(destination: str, model="mistral") -> dict:
     )
     
     try:
-        response = ollama.chat(
-            model=model,
+        client = get_groq_client()
+        if not client:
+            return {"destination_type": "City", "weather": "Pleasant"}
+            
+        response = client.chat.completions.create(
+            model="mixtral-8x7b-32768",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Destination: {destination}"}
-            ]
+            ],
+            response_format={"type": "json_object"}
         )
         
-        response_text = response['message']['content']
+        response_text = response.choices[0].message.content
         start_idx = response_text.find('{')
         end_idx = response_text.rfind('}')
         if start_idx != -1 and end_idx != -1 and start_idx < end_idx:
