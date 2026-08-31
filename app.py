@@ -196,7 +196,7 @@ def stream_llm(model_name, messages):
         client = Groq(api_key=api_key)
         
         # Groq uses different model names, map mistral to miqtral-8x7b-32768
-        groq_model = "mixtral-8x7b-32768" 
+        groq_model = "llama3-8b-8192" 
         
         response = client.chat.completions.create(
             model=groq_model,
@@ -234,7 +234,7 @@ with tab1:
     input_col, info_col = st.columns([2, 1])
 
     with info_col:
-        st.info("?? AI Stylist Model: **Mixtral 8x7B** (Cloud API via Groq)")
+        st.info("?? AI Stylist Model: **Llama 3 8B** (Cloud API via Groq)")
         budget = st.slider("Budget (₹)", 1000, 10000, 5000, step=500)
 
     with input_col:

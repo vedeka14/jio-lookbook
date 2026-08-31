@@ -8,7 +8,10 @@ import easyocr
 import io
 
 def get_groq_client():
-    api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+    try:
+        api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+    except Exception:
+        api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         return None
     return Groq(api_key=api_key)
@@ -34,7 +37,7 @@ def extract_destination_from_ticket(image_bytes: bytes) -> str:
         )
         
         response = client.chat.completions.create(
-            model="mixtral-8x7b-32768",
+            model="llama3-8b-8192",
             messages=[{"role": "user", "content": prompt}]
         )
         content = response.choices[0].message.content.strip().replace("'", "").replace('"', "").replace("\n", " ").strip()
@@ -72,7 +75,7 @@ def detect_trip_context(destination: str, model="mistral") -> dict:
             return {"destination_type": "City", "weather": "Pleasant"}
             
         response = client.chat.completions.create(
-            model="mixtral-8x7b-32768",
+            model="llama3-8b-8192",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Destination: {destination}"}
