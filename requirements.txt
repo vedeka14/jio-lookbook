@@ -16,7 +16,7 @@ ultralytics
 # Computer Vision
 # ==================================================
 
-opencv-python-headless
+opencv-python
 Pillow
 
 # ==================================================
