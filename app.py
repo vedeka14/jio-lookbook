@@ -12,9 +12,6 @@ ROOT = Path(__file__).resolve().parent
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))
 
-from fashion_ai.wardrobeinference.build_wardrobe_yolo import build_wardrobe
-from travel_context_ai.scripts.ocr_ticket import ocr_ticket
-from travel_context_ai.scripts.travel_context import understand_trip
 from recommendation_engine.scripts.recommend_outfit import recommend
 from style_assistant.scripts.build_prompt import build_prompt_from_candidates
 from style_assistant.scripts.outfit_validator import validate_outfit_json
@@ -192,7 +189,10 @@ if "messages" not in st.session_state:
 
 def stream_llm(model_name, messages):
     try:
-        api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+        try:
+            api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+        except Exception:
+            api_key = os.environ.get("GROQ_API_KEY")
         if not api_key:
             yield "**Error:** GROQ_API_KEY is missing. Please add it to Streamlit Secrets or your environment variables."
             return
