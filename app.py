@@ -8,10 +8,6 @@ from groq import Groq
 import json
 import time
 
-ROOT = Path(__file__).resolve().parent
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))
-
 from recommendation_engine.scripts.recommend_outfit import recommend
 from style_assistant.scripts.build_prompt import build_prompt_from_candidates
 from style_assistant.scripts.outfit_validator import validate_outfit_json
