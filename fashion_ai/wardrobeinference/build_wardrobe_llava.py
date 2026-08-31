@@ -24,34 +24,44 @@ def enrich_metadata(cat):
         return {"style": "layering/cozy", "occasion": ["travel", "outdoor", "evening"], "weather": "cold", "fit": "relaxed"}
     return {"style": "versatile", "occasion": ["casual day"], "weather": "all", "fit": "regular"}
 
-def ask_llava(img_b64):
-    payload = {
-        "model": "llava",
-        "messages": [
-            {
-                "role": "user",
-                "content": "You are a strict fashion AI. Analyze the image and output ONLY a raw JSON array containing a list of clothing items worn. You MUST be able to recognize standard Western wear (e.g. Jeans, Blazer, Skirt, T-Shirt, Shrug) AND Indian/Indo-Western ethnic wear (e.g. Kurta, Saree, Sharara, Jodhpuri Set, Fishtail Lehenga). For each item, give the \"category\" and the \"color\". Do not use markdown. Example: [{\"category\": \"Sharara\", \"color\": \"Pink\"}]",
-                "images": [img_b64]
-            }
-        ],
-        "stream": False
-    }
+from groq import Groq
+import streamlit as st
+
+def get_groq_client():
     try:
-        # Increased timeout to 5 minutes because inference is falling back to CPU
-        response = requests.post("http://localhost:11434/api/chat", json=payload, timeout=300)
-        content = response.json().get("message", {}).get("content", "")
+        api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+    except Exception:
+        api_key = os.environ.get("GROQ_API_KEY")
+    if not api_key:
+        return None
+    return Groq(api_key=api_key)
+
+def ask_llava(img_b64):
+    client = get_groq_client()
+    if not client: return []
+    try:
+        response = client.chat.completions.create(
+            model="qwen/qwen3.6-27b",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": "You are a strict fashion AI. Analyze the image and output ONLY a raw JSON array containing a list of clothing items worn. You MUST be able to recognize standard Western wear (e.g. Jeans, Blazer, Skirt, T-Shirt, Shrug) AND Indian/Indo-Western ethnic wear (e.g. Kurta, Saree, Sharara, Jodhpuri Set, Fishtail Lehenga). For each item, give the 'category' and the 'color'. Do not use markdown. Example: [{\"category\": \"Sharara\", \"color\": \"Pink\"}]"},
+                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}}
+                    ]
+                }
+            ],
+            temperature=0.0
+        )
+        content = response.choices[0].message.content
         content = content.replace("```json", "").replace("```", "").strip()
-        try:
-            return json.loads(content)
-        except:
-            # Sometime it might prefix with something, try to find bracket
-            idx = content.find("[")
-            edx = content.rfind("]")
-            if idx != -1 and edx != -1:
-                return json.loads(content[idx:edx+1])
-            return []
+        idx = content.find("[")
+        edx = content.rfind("]")
+        if idx != -1 and edx != -1:
+            return json.loads(content[idx:edx+1])
+        return []
     except Exception as e:
-        print("LLaVA Error:", e)
+        print("Groq Vision Error:", e)
         return []
 
 def build_wardrobe(silent=False):
