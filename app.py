@@ -374,26 +374,19 @@ with tab1:
         progress_bar.progress(30, text="🧠 Setting up event context...")
         status_box.markdown("✅ Uploads Processed\n\n✅ Structuring Event...")
         
-        if ticket and occasion == "✈️ Travel":
-            ocr_ticket(silent=True)
-            st.session_state.trip_context = understand_trip(silent=True)
-            st.session_state.trip_context["gender"] = gender.lower()
-            if vibe:
-                st.session_state.trip_context["vibe"] = vibe
-        else:
-            st.session_state.trip_context = {
-                "destination": dyn_context.get("destination", dyn_context.get("setting", dyn_context.get("wedding_type", dyn_context.get("cafe_type", "Local")))),
-                "weather": dyn_context.get("weather", dyn_context.get("season", "Controlled")),
-                "trip": dyn_context.get("trip", "Event"),
-                "activities": dyn_context.get("activities", []),
-                "gender": gender.lower()
-            }
-            if vibe:
-                st.session_state.trip_context["vibe"] = vibe
-            if "dress_code" in dyn_context:
-                st.session_state.trip_context["activities"].append(f"Dress Code: {dyn_context['dress_code']}")
-            if "time" in dyn_context:
-                st.session_state.trip_context["activities"].append(f"Time: {dyn_context['time']}")
+        st.session_state.trip_context = {
+            "destination": dyn_context.get("destination", dyn_context.get("setting", dyn_context.get("wedding_type", dyn_context.get("cafe_type", "Local")))),
+            "weather": dyn_context.get("weather", dyn_context.get("season", "Controlled")),
+            "trip": dyn_context.get("trip", "Event"),
+            "activities": dyn_context.get("activities", []),
+            "gender": gender.lower()
+        }
+        if vibe:
+            st.session_state.trip_context["vibe"] = vibe
+        if "dress_code" in dyn_context:
+            st.session_state.trip_context["activities"].append(f"Dress Code: {dyn_context['dress_code']}")
+        if "time" in dyn_context:
+            st.session_state.trip_context["activities"].append(f"Time: {dyn_context['time']}")
 
         # Step 3
         progress_bar.progress(60, text="🤖 Running LLaVA Vision Model on wardrobe photos (Heavy Step)...")
