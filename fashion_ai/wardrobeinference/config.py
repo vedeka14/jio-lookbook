@@ -1,5 +1,4 @@
 from pathlib import Path
-import torch
 
 # ==================================================
 # Root
@@ -38,4 +37,4 @@ COLORS_FILE = DATA_DIR / "colors.json"
 # Device
 # ==================================================
 
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+DEVICE = "cpu"

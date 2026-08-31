@@ -1,5 +1,4 @@
 from pathlib import Path
-import torch
 
 # ==================================================
 # Root
@@ -30,4 +29,4 @@ OCR_OUTPUT = OUTPUT_DIR / "ocr.json"
 # Device
 # ==================================================
 
-DEVICE = "cuda" if torch.cuda.is_available() else "cpu"
+DEVICE = "cpu"

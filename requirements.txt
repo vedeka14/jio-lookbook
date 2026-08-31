@@ -2,15 +2,13 @@
 # Deep Learning
 # ==================================================
 
-torch
-torchvision
-transformers
+# Removed explicit torch/vision to let easyocr handle it natively without transformers bloat.
 
 # ==================================================
 # YOLO
 # ==================================================
 
-ultralytics
+# Removed ultralytics as we moved to Groq Vision
 
 # ==================================================
 # Computer Vision
