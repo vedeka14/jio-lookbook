@@ -37,7 +37,7 @@ def extract_destination_from_ticket(image_bytes: bytes) -> str:
         )
         
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="openai/gpt-oss-20b",
             messages=[{"role": "user", "content": prompt}]
         )
         content = response.choices[0].message.content.strip().replace("'", "").replace('"', "").replace("\n", " ").strip()
@@ -75,7 +75,7 @@ def detect_trip_context(destination: str, model="mistral") -> dict:
             return {"destination_type": "City", "weather": "Pleasant"}
             
         response = client.chat.completions.create(
-            model="llama3-8b-8192",
+            model="openai/gpt-oss-20b",
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": f"Destination: {destination}"}
