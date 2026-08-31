@@ -8,8 +8,23 @@ def build_prompt_from_candidates(candidate_json):
     Forces the LLM to output ONLY a JSON object.
     """
     
-    # We serialize the candidate json to a formatted string
-    candidates_str = json.dumps(candidate_json, indent=2)
+    import copy
+    slim_json = {}
+    slim_json["missing_items"] = candidate_json.get("missing_items", [])
+    slim_json["candidates"] = {}
+    
+    for cat, items in candidate_json.get("candidates", {}).items():
+        seen = set()
+        unique_items = []
+        for item in items:
+            desc = f"{item.get('color', '')} {item.get('category', '')}".strip().title()
+            if desc not in seen:
+                seen.add(desc)
+                unique_items.append(desc)
+        slim_json["candidates"][cat] = unique_items
+    
+    # We serialize the candidate json to a compact string
+    candidates_str = json.dumps(slim_json)
     
     occasion = candidate_json.get("occasion", "").lower()
     occasion_rules = ""
