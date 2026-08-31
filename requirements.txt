@@ -21,7 +21,7 @@ Pillow
 # OCR
 # ==================================================
 
-easyocr
+# Removed easyocr (we now use Groq Vision natively)
 
 # ==================================================
 # Scientific Computing

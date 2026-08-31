@@ -4,8 +4,7 @@ import os
 import streamlit as st
 from groq import Groq
 
-import easyocr
-import io
+import base64
 
 def get_groq_client():
     try:
@@ -17,28 +16,31 @@ def get_groq_client():
     return Groq(api_key=api_key)
 
 def extract_destination_from_ticket(image_bytes: bytes) -> str:
-    """Uses EasyOCR to read text, then Groq to extract destination."""
-    logging.info("[TripDetector] Running EasyOCR on uploaded ticket...")
+    """Uses Groq Vision (Qwen) to read text and extract destination natively."""
+    logging.info("[TripDetector] Running Groq Vision on uploaded ticket...")
     try:
-        reader = easyocr.Reader(["en"], verbose=False)
-        result = reader.readtext(image_bytes)
-        
-        # Join all extracted text into one giant string
-        raw_text = " ".join([text for _, text, _ in result])
-        
+        img_b64 = base64.b64encode(image_bytes).decode('utf-8')
         client = get_groq_client()
         if not client:
             return ""
 
         prompt = (
-            f"Here is raw text extracted from a flight ticket/boarding pass: {raw_text}\n\n"
-            "Look carefully for the 'To', 'Arrival', or 'Destination' city. DO NOT output the departure or 'From' city. "
+            "Look carefully at this flight ticket/boarding pass. Look for the 'To', 'Arrival', or 'Destination' city. DO NOT output the departure or 'From' city. "
             "What is the final arrival destination city? Output ONLY the name of the destination city (e.g. 'Goa', 'Paris', 'Tokyo'), nothing else. If you cannot find one, output 'Unknown'."
         )
         
         response = client.chat.completions.create(
-            model="openai/gpt-oss-20b",
-            messages=[{"role": "user", "content": prompt}]
+            model="qwen/qwen3.6-27b",
+            messages=[
+                {
+                    "role": "user",
+                    "content": [
+                        {"type": "text", "text": prompt},
+                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}}
+                    ]
+                }
+            ],
+            temperature=0.0
         )
         content = response.choices[0].message.content.strip().replace("'", "").replace('"', "").replace("\n", " ").strip()
         
@@ -47,7 +49,7 @@ def extract_destination_from_ticket(image_bytes: bytes) -> str:
         return content
         
     except Exception as e:
-        logging.error(f"[TripDetector] EasyOCR/Groq pipeline failed: {e}")
+        logging.error(f"[TripDetector] Groq Vision pipeline failed: {e}")
         return ""
 
 def detect_trip_context(destination: str, model="mistral") -> dict:
