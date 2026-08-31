@@ -238,7 +238,7 @@ with tab1:
     input_col, info_col = st.columns([2, 1])
 
     with info_col:
-        st.info("🤖 AI Stylist Model: **mistral** (running locally via Ollama)")
+        st.info("?? AI Stylist Model: **Mixtral 8x7B** (Cloud API via Groq)")
         budget = st.slider("Budget (₹)", 1000, 10000, 5000, step=500)
 
     with input_col:
