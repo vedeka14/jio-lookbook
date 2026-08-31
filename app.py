@@ -277,10 +277,11 @@ with tab1:
             dyn_context["trip"] = "Travel"
             
             # Destination Input and Auto-Detect
-            if "dest_input_val" not in st.session_state:
-                st.session_state["dest_input_val"] = "Zurich"
+            if "dest_val" not in st.session_state:
+                st.session_state["dest_val"] = "Zurich"
                 
-            dest = st.text_input("Destination", key="dest_input_val")
+            dest = st.text_input("Destination", value=st.session_state["dest_val"])
+            st.session_state["dest_val"] = dest
             dyn_context["destination"] = dest
                 
             ticket = st.file_uploader("📄 Travel Ticket (Optional OCR extraction)", type=["jpg", "jpeg", "png", "pdf"], key="ticket_upload")
@@ -292,7 +293,7 @@ with tab1:
                 st.session_state["run_auto_detect_flag"] = False
                 with st.spinner("🤖 AI is analyzing your ticket and trip context... (This takes about 10-15 seconds)"):
                     ticket_file = st.session_state.get("ticket_upload")
-                    current_dest = st.session_state.get("dest_input_val", "Zurich")
+                    current_dest = st.session_state.get("dest_val", "Zurich")
                     
                     if ticket_file is not None:
                         try:
@@ -301,7 +302,7 @@ with tab1:
                             ocr_dest = extract_destination_from_ticket(ticket_bytes)
                             if ocr_dest:
                                 current_dest = ocr_dest
-                                st.session_state["dest_input_val"] = ocr_dest
+                                st.session_state["dest_val"] = ocr_dest
                         except Exception:
                             st.warning("⚠️ Please re-upload your ticket image. The file was cleared from memory.")
                     
