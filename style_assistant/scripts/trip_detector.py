@@ -20,6 +20,7 @@ def get_groq_client():
         return None
     return Groq(api_key=api_key)
 
+@st.cache_data(show_spinner=False)
 def extract_destination_from_ticket(image_bytes: bytes) -> str:
     """Uses Groq Vision (Qwen) to read text and extract destination natively."""
     logging.info("[TripDetector] Running Groq Vision on uploaded ticket...")
@@ -70,7 +71,10 @@ def extract_destination_from_ticket(image_bytes: bytes) -> str:
         return content
         
     except Exception as e:
-        logging.error(f"[TripDetector] Groq Vision pipeline failed: {e}")
+        error_msg = str(e)
+        logging.error(f"[TripDetector] Groq Vision pipeline failed: {error_msg}")
+        if "429" in error_msg:
+            return "ERROR_RATE_LIMIT"
         return ""
 
 def detect_trip_context(destination: str, model="mistral") -> dict:

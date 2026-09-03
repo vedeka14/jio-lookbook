@@ -309,7 +309,9 @@ with tab1:
                                 st.error("🚨 **API KEY MISSING!** The Cloud server cannot see your local secrets.toml. Please add it to 'Manage app' > 'Settings' > 'Secrets'!")
                             
                             ocr_dest = extract_destination_from_ticket(ticket_bytes)
-                            if ocr_dest:
+                            if ocr_dest == "ERROR_RATE_LIMIT":
+                                st.error("🚨 **API Rate Limit Reached!** You clicked too fast and hit Groq's 8,000 Token-Per-Minute limit. **Please wait exactly 60 seconds** and try again.")
+                            elif ocr_dest:
                                 current_dest = ocr_dest
                                 st.session_state["dest_val"] = ocr_dest
                             else:
