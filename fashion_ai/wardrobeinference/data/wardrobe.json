@@ -1,9 +1,99 @@
-﻿[
+[
     {
         "image": "ds04_mixed_ind_west_clothing__t_000001.jpg",
         "category": "dress",
         "color": "Beige",
         "confidence": 0.8
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000022.jpg",
+        "category": "dress",
+        "color": "Black",
+        "confidence": 0.379
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
+        "category": "dress",
+        "color": "Mustard",
+        "confidence": 0.405
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
+        "category": "dress",
+        "color": "Olive",
+        "confidence": 0.296
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000019.jpg",
+        "category": "dress",
+        "color": "Teal",
+        "confidence": 0.636
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
+        "category": "dupatta",
+        "color": "Lavender",
+        "confidence": 0.348
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "category": "handbag",
+        "color": "Olive",
+        "confidence": 0.708
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "category": "kameez",
+        "color": "Beige",
+        "confidence": 0.255
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "category": "kameez",
+        "color": "Olive",
+        "confidence": 0.272
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
+        "category": "kurta",
+        "color": "Beige",
+        "confidence": 0.296
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
+        "category": "lungi",
+        "color": "Lavender",
+        "confidence": 0.291
+    },
+    {
+        "image": "ds07_shirt_v1i_yolo26_t_000016.jpg",
+        "category": "pants",
+        "color": "Black",
+        "confidence": 0.301
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000018.jpg",
+        "category": "saree",
+        "color": "Brown",
+        "confidence": 0.469
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
+        "category": "saree",
+        "color": "Lavender",
+        "confidence": 0.706
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000009.jpg",
+        "category": "shalwar",
+        "color": "Beige",
+        "confidence": 0.457
+    },
+    {
+        "image": "ds05_saree_detection_v1i_yolo_t_000018.jpg",
+        "category": "shalwar",
+        "color": "Brown",
+        "confidence": 0.272
     },
     {
         "image": "ds04_mixed_ind_west_clothing__t_000001.jpg",
@@ -13,75 +103,9 @@
     },
     {
         "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
-        "category": "dupatta",
-        "color": "Lavender",
-        "confidence": 0.348
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
-        "category": "saree",
-        "color": "Lavender",
-        "confidence": 0.706
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
-        "category": "lungi",
-        "color": "Lavender",
-        "confidence": 0.291
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000005.jpg",
         "category": "shalwar",
         "color": "Lavender",
         "confidence": 0.292
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000009.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.773
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000009.jpg",
-        "category": "shalwar",
-        "color": "Beige",
-        "confidence": 0.457
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "shirt",
-        "color": "Beige",
-        "confidence": 0.271
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "kameez",
-        "color": "Beige",
-        "confidence": 0.272
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "kameez",
-        "color": "Olive",
-        "confidence": 0.255
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "dress",
-        "color": "Olive",
-        "confidence": 0.46
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.511
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "handbag",
-        "color": "Beige",
-        "confidence": 0.708
     },
     {
         "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
@@ -90,81 +114,27 @@
         "confidence": 0.296
     },
     {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "skirt",
-        "color": "Beige",
-        "confidence": 0.508
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
-        "category": "shoes",
-        "color": "Beige",
-        "confidence": 0.254
-    },
-    {
         "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
         "category": "shirt",
-        "color": "Olive",
+        "color": "Beige",
         "confidence": 0.315
     },
     {
-        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
+        "image": "ds07_shirt_v1i_yolo26_t_000016.jpg",
         "category": "shirt",
-        "color": "Mustard",
-        "confidence": 0.252
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.296
-    },
-    {
-        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
-        "category": "dress",
-        "color": "Mustard",
-        "confidence": 0.405
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000013.jpg",
-        "category": "dress",
-        "color": "Beige",
-        "confidence": 0.636
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000018.jpg",
-        "category": "saree",
-        "color": "Brown",
-        "confidence": 0.469
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000018.jpg",
-        "category": "shalwar",
-        "color": "Brown",
-        "confidence": 0.272
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000019.jpg",
-        "category": "dress",
-        "color": "Teal",
-        "confidence": 0.636
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000019.jpg",
-        "category": "dress",
-        "color": "Teal",
-        "confidence": 0.355
-    },
-    {
-        "image": "ds05_saree_detection_v1i_yolo_t_000022.jpg",
-        "category": "dress",
-        "color": "Black",
-        "confidence": 0.379
+        "color": "Grey",
+        "confidence": 0.393
     },
     {
         "image": "ds07_shirt_v1i_yolo26_t_000013.jpg",
         "category": "shirt",
         "color": "Lavender",
+        "confidence": 0.252
+    },
+    {
+        "image": "ds04_mixed_ind_west_clothing__t_000041.jpg",
+        "category": "shirt",
+        "color": "Mustard",
         "confidence": 0.252
     },
     {
@@ -180,22 +150,10 @@
         "confidence": 0.407
     },
     {
-        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
-        "category": "kurta",
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "category": "shoes",
         "color": "Beige",
-        "confidence": 0.296
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
-        "category": "shirt",
-        "color": "Beige",
-        "confidence": 0.274
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
-        "category": "shorts",
-        "color": "Teal",
-        "confidence": 0.498
+        "confidence": 0.254
     },
     {
         "image": "ds07_shirt_v1i_yolo26_t_000015.jpg",
@@ -204,22 +162,9 @@
         "confidence": 0.514
     },
     {
-        "image": "ds07_shirt_v1i_yolo26_t_000016.jpg",
-        "category": "shirt",
-        "color": "Black",
-        "confidence": 0.393
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000016.jpg",
-        "category": "pants",
-        "color": "Grey",
-        "confidence": 0.301
-    },
-    {
-        "image": "ds07_shirt_v1i_yolo26_t_000033.jpg",
-        "category": "shirt",
+        "image": "ds04_mixed_ind_west_clothing__t_000040.jpg",
+        "category": "skirt",
         "color": "Beige",
-        "confidence": 0.275
+        "confidence": 0.508
     }
 ]
-
