@@ -7,8 +7,17 @@ from pathlib import Path
 from fashion_ai.wardrobeinference.config import PHOTOS_DIR, WARDROBE_FILE
 
 def get_base64_image(image_path):
+    from io import BytesIO
+    from PIL import Image
     with open(image_path, "rb") as img_file:
-        return base64.b64encode(img_file.read()).decode("utf-8")
+        img_bytes = img_file.read()
+        img = Image.open(BytesIO(img_bytes))
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
+        img.thumbnail((512, 512))
+        buf = BytesIO()
+        img.save(buf, format='JPEG', quality=85)
+        return base64.b64encode(buf.getvalue()).decode("utf-8")
 
 def enrich_metadata(cat):
     c = cat.lower()

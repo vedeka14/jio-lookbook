@@ -24,7 +24,17 @@ def extract_destination_from_ticket(image_bytes: bytes) -> str:
     """Uses Groq Vision (Qwen) to read text and extract destination natively."""
     logging.info("[TripDetector] Running Groq Vision on uploaded ticket...")
     try:
-        img_b64 = base64.b64encode(image_bytes).decode('utf-8')
+        from io import BytesIO
+        from PIL import Image
+        img = Image.open(BytesIO(image_bytes))
+        if img.mode != 'RGB':
+            img = img.convert('RGB')
+        img.thumbnail((512, 512))
+        buf = BytesIO()
+        img.save(buf, format='JPEG', quality=85)
+        compressed_bytes = buf.getvalue()
+        
+        img_b64 = base64.b64encode(compressed_bytes).decode('utf-8')
         client = get_groq_client()
         if not client:
             return ""
