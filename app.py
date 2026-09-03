@@ -443,10 +443,13 @@ with tab1:
             st.code(json.dumps(st.session_state.rec_data['ajio_query'], indent=2), language="json")
 
 with tab2:
-    if st.session_state.wardrobe:
-        st.markdown("### 👕 Wardrobe Summary")
-        
-        tops_cats = ["shirt", "t-shirt", "top", "jacket", "sweater", "hoodie"]
+    if "wardrobe" in st.session_state and st.session_state.wardrobe is not None:
+        if len(st.session_state.wardrobe) == 0:
+            st.warning("Your wardrobe is empty! Upload some photos or use the default sample wardrobe.")
+        else:
+            st.markdown("### 👕 Wardrobe Summary")
+            
+            tops_cats = ["shirt", "t-shirt", "top", "jacket", "sweater", "hoodie"]
         bottoms_cats = ["pants", "jeans", "shorts", "skirt"]
         trad_cats = ["saree", "kurta", "churidaar", "dhoti", "lehenga", "anarkali", "sherwani", "kameez", "shalwar"]
         footwear_cats = ["shoes", "sandals", "boots"]
@@ -495,8 +498,11 @@ with tab2:
         st.info("Run the Analysis in the Overview tab first.")
 
 with tab3:
-    if st.session_state.rec_data:
-        st.markdown("## ✨ AI Stylist")
+    if "rec_data" in st.session_state and st.session_state.rec_data is not None:
+        if len(st.session_state.rec_data) == 0:
+            st.warning("No recommendations could be generated. Please ensure your wardrobe is not empty.")
+        else:
+            st.markdown("## ✨ AI Stylist")
         st.markdown("────────────────────────")
         
         # Denser Layout
