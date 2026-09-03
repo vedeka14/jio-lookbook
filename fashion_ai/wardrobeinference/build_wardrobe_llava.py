@@ -53,7 +53,9 @@ def ask_llava(img_b64):
             ],
             temperature=0.0
         )
-        content = response.choices[0].message.content
+        import re
+        raw_content = response.choices[0].message.content
+        content = re.sub(r'<think>.*?</think>', '', raw_content, flags=re.DOTALL).strip()
         content = content.replace("```json", "").replace("```", "").strip()
         idx = content.find("[")
         edx = content.rfind("]")

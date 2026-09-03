@@ -42,7 +42,13 @@ def extract_destination_from_ticket(image_bytes: bytes) -> str:
             ],
             temperature=0.0
         )
-        content = response.choices[0].message.content.strip().replace("'", "").replace('"', "").replace("\n", " ").strip()
+        
+        import re
+        raw_content = response.choices[0].message.content
+        # Qwen might output reasoning tags
+        clean_content = re.sub(r'<think>.*?</think>', '', raw_content, flags=re.DOTALL).strip()
+        
+        content = clean_content.replace("'", "").replace('"', "").replace("\n", " ").strip()
         
         if content.lower() == "unknown" or len(content) > 30:
             return ""
