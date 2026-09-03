@@ -203,9 +203,10 @@ def stream_llm(model_name, messages):
         # Groq uses different model names, map mistral to miqtral-8x7b-32768
         groq_model = "openai/gpt-oss-20b" 
         
+        clean_messages = [{"role": m["role"], "content": m["content"]} for m in messages]
         response = client.chat.completions.create(
             model=groq_model,
-            messages=messages,
+            messages=clean_messages,
             stream=True,
             response_format={"type": "json_object"}
         )
