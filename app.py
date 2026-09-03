@@ -185,12 +185,17 @@ if "messages" not in st.session_state:
 
 def stream_llm(model_name, messages):
     try:
+        api_key = None
         try:
-            api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+            api_key = st.secrets.get("GROQ_API_KEY")
         except Exception:
-            api_key = os.environ.get("GROQ_API_KEY")
+            pass
+            
         if not api_key:
-            yield "**Error:** GROQ_API_KEY is missing. Please add it to Streamlit Secrets or your environment variables."
+            api_key = os.environ.get("GROQ_API_KEY")
+            
+        if not api_key:
+            yield "**Error:** GROQ_API_KEY is missing! If you are on Streamlit Cloud, you MUST add it via the website: Click 'Manage app' (bottom right) -> '⋮' -> 'Settings' -> 'Secrets'."
             return
 
         client = Groq(api_key=api_key)

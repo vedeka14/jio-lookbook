@@ -7,10 +7,15 @@ from groq import Groq
 import base64
 
 def get_groq_client():
+    api_key = None
     try:
-        api_key = st.secrets.get("GROQ_API_KEY") if hasattr(st, "secrets") and "GROQ_API_KEY" in st.secrets else os.environ.get("GROQ_API_KEY")
+        api_key = st.secrets.get("GROQ_API_KEY")
     except Exception:
+        pass
+        
+    if not api_key:
         api_key = os.environ.get("GROQ_API_KEY")
+        
     if not api_key:
         return None
     return Groq(api_key=api_key)
