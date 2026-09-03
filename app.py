@@ -204,6 +204,11 @@ def stream_llm(model_name, messages):
         groq_model = "openai/gpt-oss-20b" 
         
         clean_messages = [{"role": m["role"], "content": m["content"]} for m in messages]
+        clean_messages.append({
+            "role": "system",
+            "content": "Reminder: You MUST output your response as a valid JSON object matching the exact schema provided previously. Do not output conversational text outside of the JSON. Ensure your output contains the word json."
+        })
+        
         response = client.chat.completions.create(
             model=groq_model,
             messages=clean_messages,
