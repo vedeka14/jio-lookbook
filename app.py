@@ -303,13 +303,20 @@ with tab1:
                     if ticket_file is not None:
                         try:
                             ticket_bytes = ticket_file.getvalue()
-                            from style_assistant.scripts.trip_detector import extract_destination_from_ticket
+                            from style_assistant.scripts.trip_detector import extract_destination_from_ticket, get_groq_client
+                            
+                            if not get_groq_client():
+                                st.error("🚨 **API KEY MISSING!** The Cloud server cannot see your local secrets.toml. Please add it to 'Manage app' > 'Settings' > 'Secrets'!")
+                            
                             ocr_dest = extract_destination_from_ticket(ticket_bytes)
                             if ocr_dest:
                                 current_dest = ocr_dest
                                 st.session_state["dest_val"] = ocr_dest
-                        except Exception:
-                            st.warning("⚠️ Please re-upload your ticket image. The file was cleared from memory.")
+                            else:
+                                if get_groq_client():
+                                    st.error("🚨 **API Request Failed!** The vision model returned an empty string. This could be a rate limit or a timeout.")
+                        except Exception as e:
+                            st.warning(f"⚠️ Pipeline crashed: {e}")
                     
                     from style_assistant.scripts.trip_detector import detect_trip_context
                     res = detect_trip_context(current_dest)
