@@ -166,5 +166,81 @@
         "category": "skirt",
         "color": "Beige",
         "confidence": 0.508
+    },
+    {
+        "image": "media_1788428977366.png",
+        "category": "Lehenga",
+        "color": "Blue",
+        "confidence": 0.99,
+        "crop": "media_1788428977366.png",
+        "style": "traditional/ethnic",
+        "occasion": [
+            "wedding",
+            "festival",
+            "traditional"
+        ],
+        "weather": "all",
+        "fit": "relaxed"
+    },
+    {
+        "image": "media_1788428977445.png",
+        "category": "Dress",
+        "color": "White",
+        "confidence": 0.99,
+        "crop": "media_1788428977445.png",
+        "style": "elegant/chic",
+        "occasion": [
+            "dinner",
+            "party",
+            "date",
+            "resort"
+        ],
+        "weather": "warm",
+        "fit": "flowy"
+    },
+    {
+        "image": "media_1788428977502.png",
+        "category": "Lehenga",
+        "color": "Green",
+        "confidence": 0.99,
+        "crop": "media_1788428977502.png",
+        "style": "traditional/ethnic",
+        "occasion": [
+            "wedding",
+            "festival",
+            "traditional"
+        ],
+        "weather": "all",
+        "fit": "relaxed"
+    },
+    {
+        "image": "media_1788428977518.jpg",
+        "category": "Lehenga",
+        "color": "Silver",
+        "confidence": 0.99,
+        "crop": "media_1788428977518.jpg",
+        "style": "traditional/ethnic",
+        "occasion": [
+            "wedding",
+            "festival",
+            "traditional"
+        ],
+        "weather": "all",
+        "fit": "relaxed"
+    },
+    {
+        "image": "media_1788428977558.png",
+        "category": "Saree",
+        "color": "Maroon",
+        "confidence": 0.99,
+        "crop": "media_1788428977558.png",
+        "style": "traditional/ethnic",
+        "occasion": [
+            "wedding",
+            "festival",
+            "traditional"
+        ],
+        "weather": "all",
+        "fit": "relaxed"
     }
 ]

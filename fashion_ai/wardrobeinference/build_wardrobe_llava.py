@@ -48,32 +48,42 @@ def get_groq_client():
 def ask_llava(img_b64):
     client = get_groq_client()
     if not client: return []
-    try:
-        response = client.chat.completions.create(
-            model="qwen/qwen3.6-27b",
-            messages=[
-                {
-                    "role": "user",
-                    "content": [
-                        {"type": "text", "text": "You are a strict fashion AI. Analyze the image and output ONLY a raw JSON array containing a list of clothing items worn. You MUST be able to recognize standard Western wear (e.g. Jeans, Blazer, Skirt, T-Shirt, Shrug) AND Indian/Indo-Western ethnic wear (e.g. Kurta, Saree, Sharara, Jodhpuri Set, Fishtail Lehenga). For each item, give the 'category' and the 'color'. Do not use markdown. Example: [{\"category\": \"Sharara\", \"color\": \"Pink\"}]"},
-                        {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}}
-                    ]
-                }
-            ],
-            temperature=0.0
-        )
-        import re
-        raw_content = response.choices[0].message.content
-        content = re.sub(r'<think>.*?</think>', '', raw_content, flags=re.DOTALL).strip()
-        content = content.replace("```json", "").replace("```", "").strip()
-        idx = content.find("[")
-        edx = content.rfind("]")
-        if idx != -1 and edx != -1:
-            return json.loads(content[idx:edx+1])
-        return []
-    except Exception as e:
-        print("Groq Vision Error:", e)
-        return []
+    
+    import time
+    max_retries = 5
+    for attempt in range(max_retries):
+        try:
+            response = client.chat.completions.create(
+                model="qwen/qwen3.6-27b",
+                messages=[
+                    {
+                        "role": "user",
+                        "content": [
+                            {"type": "text", "text": "You are a strict fashion AI. Analyze the image and output ONLY a raw JSON array containing a list of clothing items worn. You MUST be able to recognize standard Western wear (e.g. Jeans, Blazer, Skirt, T-Shirt, Shrug) AND Indian/Indo-Western ethnic wear (e.g. Kurta, Saree, Sharara, Jodhpuri Set, Fishtail Lehenga). For each item, give the 'category' and the 'color'. Do not use markdown. Example: [{\"category\": \"Sharara\", \"color\": \"Pink\"}]"},
+                            {"type": "image_url", "image_url": {"url": f"data:image/jpeg;base64,{img_b64}"}}
+                        ]
+                    }
+                ],
+                temperature=0.0
+            )
+            import re
+            raw_content = response.choices[0].message.content
+            content = re.sub(r'<think>.*?</think>', '', raw_content, flags=re.DOTALL).strip()
+            content = content.replace("```json", "").replace("```", "").strip()
+            idx = content.find("[")
+            edx = content.rfind("]")
+            if idx != -1 and edx != -1:
+                return json.loads(content[idx:edx+1])
+            return []
+        except Exception as e:
+            error_msg = str(e)
+            if "429" in error_msg:
+                print(f"Rate limited (Attempt {attempt+1}/{max_retries}). Sleeping for 20 seconds...")
+                time.sleep(20)
+                continue
+            print("Groq Vision Error:", e)
+            return []
+    return []
 
 def build_wardrobe(silent=False):
     if not silent:
