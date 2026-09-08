@@ -416,10 +416,11 @@ with tab1:
             from fashion_ai.wardrobeinference.build_wardrobe_yolo import build_wardrobe
             st.session_state.wardrobe = build_wardrobe(silent=True)
         elif use_default:
-            import json
+            # Run YOLO on the merged dataset train images (capped at 200 for speed)
+            from fashion_ai.wardrobeinference.build_wardrobe_yolo import build_wardrobe
             from fashion_ai.wardrobeinference.config import WARDROBE_FILE
-            with open(WARDROBE_FILE, "r", encoding="utf-8-sig") as f:
-                st.session_state.wardrobe = json.load(f)
+            dataset_images_dir = Path(__file__).parent / "fashion_ai" / "yolo11" / "datasets" / "merged_dataset" / "train" / "images"
+            st.session_state.wardrobe = build_wardrobe(silent=True, source_dir=str(dataset_images_dir), max_images=200)
         else:
             st.session_state.wardrobe = []
 
@@ -489,15 +490,19 @@ with tab2:
                         image_val = item.get("image")
                         
                         display_path = None
+                        dataset_images_dir = Path(__file__).parent / "fashion_ai" / "yolo11" / "datasets" / "merged_dataset" / "train" / "images"
                         # 1. Try the YOLO crop in color_crops dir
                         if crop_val and (COLOR_CROPS_DIR / crop_val).is_file():
                             display_path = COLOR_CROPS_DIR / crop_val
-                        # 2. Fall back to original photo
+                        # 2. Fall back to original photo in user uploads
                         elif image_val and (PHOTOS_DIR / image_val).is_file():
                             display_path = PHOTOS_DIR / image_val
-                        # 3. Try crop name as original photo too
+                        # 3. Try crop name as original photo
                         elif crop_val and (PHOTOS_DIR / crop_val).is_file():
                             display_path = PHOTOS_DIR / crop_val
+                        # 4. Fall back to dataset source image
+                        elif image_val and (dataset_images_dir / image_val).is_file():
+                            display_path = dataset_images_dir / image_val
                         
                         with st.container(border=True):
                             if display_path:
