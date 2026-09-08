@@ -16,19 +16,83 @@ from style_assistant.scripts.markdown_formatter import format_outfit_markdown, b
 from travel_context_ai.config import TICKET_IMAGE
 from fashion_ai.wardrobeinference.config import PHOTOS_DIR, COLOR_CROPS_DIR
 
+YOLO_DATASET_DIR = Path(__file__).parent / "fashion_ai" / "yolo11" / "datasets" / "merged_dataset"
+DATASET_SAMPLE_STEMS = {
+    0: "ds06_w_t_000060", 1: "ds06_w_t_000014", 2: "ds06_w_t_000004",
+    3: "ds06_w_t_000004", 4: "ds06_w_t_000055", 5: "ds06_w_t_000001",
+    6: "ds06_w_t_000028", 7: "ds06_w_t_000118", 8: "ds06_w_t_000088",
+    9: "ds06_w_t_000004", 10: "ds06_w_t_000007", 11: "ds05__t_000001",
+    12: "ds01__t_000002", 14: "ds02__t_000001", 15: "ds02__t_000041",
+    16: "ds02__t_000041", 17: "ds08_w_t_000008", 18: "ds08_w_t_000107",
+    23: "ds03__t_000001", 24: "ds10__t_000003", 25: "ds04__t_000001",
+    26: "anarkali_suit_anarkali_suit_006", 27: "anklet_anklet_027",
+    28: "earring_earring_028", 30: "kolhapuri_chappal_kolhapuri_chappal_007",
+    32: "sherwani_sherwani_001", 33: "slippers_slippers_008", 34: "turban_turban_015",
+}
+
+
+def load_yolo_dataset_samples(max_items=35):
+    """Build a visual sample wardrobe from the YOLO dataset annotations.
+
+    This needs no model inference or OpenCV, so the sample wardrobe remains
+    available on Streamlit Cloud even when a computer-vision wheel is absent.
+    """
+    labels_dir = YOLO_DATASET_DIR / "train" / "labels"
+    images_dir = YOLO_DATASET_DIR / "train" / "images"
+    yaml_path = YOLO_DATASET_DIR / "data.yaml"
+    if not (labels_dir.is_dir() and images_dir.is_dir() and yaml_path.is_file()):
+        return []
+
+    class_names = {}
+    in_names = False
+    for line in yaml_path.read_text(encoding="utf-8").splitlines():
+        if line.strip() == "names:":
+            in_names = True
+            continue
+        if in_names:
+            parts = line.strip().split(":", 1)
+            if len(parts) != 2 or not parts[0].isdigit():
+                continue
+            class_names[int(parts[0])] = parts[1].strip().lower().replace("tshirt", "t-shirt")
+
+    wardrobe = []
+    for class_id, stem in DATASET_SAMPLE_STEMS.items():
+        category = class_names.get(class_id)
+        image_path = next(
+            (images_dir / f"{stem}{suffix}" for suffix in (".jpg", ".jpeg", ".png")
+             if (images_dir / f"{stem}{suffix}").is_file()),
+            None,
+        )
+        if image_path is None:
+            continue
+        if not category:
+            continue
+        wardrobe.append({
+            "image": image_path.name,
+            "category": category,
+            "color": "Dataset sample",
+            "confidence": 1.0,
+            "style": "YOLO training sample",
+            "occasion": ["any"],
+            "weather": "all",
+            "fit": "varied",
+            "source": "YOLO labelled dataset",
+        })
+        if len(wardrobe) >= max_items:
+            break
+    return wardrobe
+
 
 def run_yolo_wardrobe(source_dir=None, max_images=200):
     """Load YOLO only when wardrobe analysis is requested."""
     try:
         from fashion_ai.wardrobeinference.build_wardrobe_yolo import build_wardrobe
-    except ModuleNotFoundError as exc:
-        if exc.name == "cv2":
-            st.error(
-                "OpenCV is unavailable in this deployment. Ensure the root "
-                "requirements.txt is installed, then reboot the Streamlit app."
-            )
-            st.stop()
-        raise
+    except ImportError:
+        st.error(
+            "YOLO photo analysis is unavailable in this deployment. Ensure the "
+            "root requirements.txt is installed, then reboot the Streamlit app."
+        )
+        st.stop()
 
     return build_wardrobe(
         silent=True,
@@ -429,18 +493,20 @@ with tab1:
             st.session_state.trip_context["activities"].append(f"Time: {dyn_context['time']}")
 
         # Step 3
-        progress_bar.progress(60, text="🤖 Running YOLO Object Detection on wardrobe photos (Heavy Step)...")
+        progress_bar.progress(60, text="🤖 Building wardrobe...")
         status_box.markdown("✅ Context Ready\n\n⏳ Building Wardrobe...")
 
         if photos:
+            status_box.markdown("✅ Context Ready\n\n⏳ Analysing uploaded wardrobe photos...")
             st.session_state.wardrobe = run_yolo_wardrobe()
         elif use_default:
-            # Run YOLO on the merged dataset train images (capped at 200 for speed)
-            dataset_images_dir = Path(__file__).parent / "fashion_ai" / "yolo11" / "datasets" / "merged_dataset" / "train" / "images"
-            if not dataset_images_dir.is_dir():
-                st.error("The bundled YOLO dataset directory is missing from this deployment.")
+            # Read the bundled YOLO labels directly: no OpenCV/model download is
+            # required to show representative training samples in the Wardrobe tab.
+            status_box.markdown("✅ Context Ready\n\n⏳ Loading YOLO dataset wardrobe samples...")
+            st.session_state.wardrobe = load_yolo_dataset_samples()
+            if not st.session_state.wardrobe:
+                st.error("The bundled YOLO dataset is missing or has no readable annotations.")
                 st.stop()
-            st.session_state.wardrobe = run_yolo_wardrobe(dataset_images_dir, max_images=200)
         else:
             st.session_state.wardrobe = []
 
@@ -474,7 +540,10 @@ with tab2:
         if len(st.session_state.wardrobe) == 0:
             st.warning("Your wardrobe is empty! Upload some photos or use the default sample wardrobe.")
         else:
-            st.markdown("### 👕 Wardrobe Summary")
+            sample_wardrobe = all(item.get("source") == "YOLO labelled dataset" for item in st.session_state.wardrobe)
+            st.markdown("### 👕 Your Wardrobe")
+            if sample_wardrobe:
+                st.info("Showing one labelled image for each clothing category from the bundled YOLO training dataset.")
             
             tops_cats = ["shirt", "t-shirt", "top", "jacket", "sweater", "hoodie"]
             bottoms_cats = ["pants", "jeans", "shorts", "skirt"]
@@ -502,7 +571,7 @@ with tab2:
             m4.metric("👟 Footwear", foot)
             
             st.markdown("---")
-            with st.expander("🖼️ View Visual Gallery (YOLO Detections)", expanded=True):
+            with st.expander("🖼️ View Visual Gallery", expanded=True):
                 cols = st.columns(4)
                 for i, item in enumerate(st.session_state.wardrobe):
                     with cols[i % 4]:
@@ -510,7 +579,7 @@ with tab2:
                         image_val = item.get("image")
                         
                         display_path = None
-                        dataset_images_dir = Path(__file__).parent / "fashion_ai" / "yolo11" / "datasets" / "merged_dataset" / "train" / "images"
+                        dataset_images_dir = YOLO_DATASET_DIR / "train" / "images"
                         # 1. Try the YOLO crop in color_crops dir
                         if crop_val and (COLOR_CROPS_DIR / crop_val).is_file():
                             display_path = COLOR_CROPS_DIR / crop_val
