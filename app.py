@@ -302,7 +302,7 @@ with tab1:
 
             if st.session_state.get("run_auto_detect_flag"):
                 st.session_state["run_auto_detect_flag"] = False
-                with st.spinner("🤖 AI is analyzing your ticket and trip context... (This takes about 10-15 seconds)"):
+                with st.spinner("🤖 AI is analyzing your ticket and trip context... (If rate limit is hit, it will auto-retry and may take up to 60s)"):
                     ticket_file = st.session_state.get("ticket_upload")
                     current_dest = st.session_state.get("dest_val", "Zurich")
                     
