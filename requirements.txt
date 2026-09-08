@@ -14,7 +14,10 @@ ultralytics
 # Computer Vision
 # ==================================================
 
-opencv-python-headless
+# Headless build is required on Streamlit Cloud (it provides the `cv2` module
+# without desktop GUI libraries). Keep a minimum version that supports current
+# NumPy wheels while allowing a wheel for the Cloud Python runtime.
+opencv-python-headless>=4.10.0.84
 Pillow
 
 # ==================================================

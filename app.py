@@ -16,6 +16,26 @@ from style_assistant.scripts.markdown_formatter import format_outfit_markdown, b
 from travel_context_ai.config import TICKET_IMAGE
 from fashion_ai.wardrobeinference.config import PHOTOS_DIR, COLOR_CROPS_DIR
 
+
+def run_yolo_wardrobe(source_dir=None, max_images=200):
+    """Load YOLO only when wardrobe analysis is requested."""
+    try:
+        from fashion_ai.wardrobeinference.build_wardrobe_yolo import build_wardrobe
+    except ModuleNotFoundError as exc:
+        if exc.name == "cv2":
+            st.error(
+                "OpenCV is unavailable in this deployment. Ensure the root "
+                "requirements.txt is installed, then reboot the Streamlit app."
+            )
+            st.stop()
+        raise
+
+    return build_wardrobe(
+        silent=True,
+        source_dir=str(source_dir) if source_dir else None,
+        max_images=max_images,
+    )
+
 st.set_page_config(
     page_title="Jio Lookbook",
     page_icon="👗",
@@ -411,16 +431,16 @@ with tab1:
         # Step 3
         progress_bar.progress(60, text="🤖 Running YOLO Object Detection on wardrobe photos (Heavy Step)...")
         status_box.markdown("✅ Context Ready\n\n⏳ Building Wardrobe...")
-        
+
         if photos:
-            from fashion_ai.wardrobeinference.build_wardrobe_yolo import build_wardrobe
-            st.session_state.wardrobe = build_wardrobe(silent=True)
+            st.session_state.wardrobe = run_yolo_wardrobe()
         elif use_default:
             # Run YOLO on the merged dataset train images (capped at 200 for speed)
-            from fashion_ai.wardrobeinference.build_wardrobe_yolo import build_wardrobe
-            from fashion_ai.wardrobeinference.config import WARDROBE_FILE
             dataset_images_dir = Path(__file__).parent / "fashion_ai" / "yolo11" / "datasets" / "merged_dataset" / "train" / "images"
-            st.session_state.wardrobe = build_wardrobe(silent=True, source_dir=str(dataset_images_dir), max_images=200)
+            if not dataset_images_dir.is_dir():
+                st.error("The bundled YOLO dataset directory is missing from this deployment.")
+                st.stop()
+            st.session_state.wardrobe = run_yolo_wardrobe(dataset_images_dir, max_images=200)
         else:
             st.session_state.wardrobe = []
 
