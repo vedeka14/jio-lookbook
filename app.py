@@ -456,52 +456,59 @@ with tab2:
             st.markdown("### 👕 Wardrobe Summary")
             
             tops_cats = ["shirt", "t-shirt", "top", "jacket", "sweater", "hoodie"]
-        bottoms_cats = ["pants", "jeans", "shorts", "skirt"]
-        trad_cats = ["saree", "kurta", "churidaar", "dhoti", "lehenga", "anarkali", "sherwani", "kameez", "shalwar"]
-        footwear_cats = ["shoes", "sandals", "boots"]
-        
-        tops = 0
-        bottoms = 0
-        trad = 0
-        foot = 0
-        others = 0
-        
-        for item in st.session_state.wardrobe:
-            cat = item.get('category', '').lower()
-            if any(t in cat for t in tops_cats): tops += 1
-            elif any(t in cat for t in bottoms_cats): bottoms += 1
-            elif any(t in cat for t in trad_cats): trad += 1
-            elif any(t in cat for t in footwear_cats): foot += 1
-            else: others += 1
+            bottoms_cats = ["pants", "jeans", "shorts", "skirt"]
+            trad_cats = ["saree", "kurta", "churidaar", "dhoti", "lehenga", "anarkali", "sherwani", "kameez", "shalwar"]
+            footwear_cats = ["shoes", "sandals", "boots"]
             
-        m1, m2, m3, m4 = st.columns(4)
-        m1.metric("👕 Tops", tops)
-        m2.metric("👖 Bottoms", bottoms)
-        m3.metric("🥻 Traditional", trad)
-        m4.metric("👟 Footwear", foot)
-        
-        st.markdown("---")
-        with st.expander("🖼️ View Visual Gallery (YOLO Detections)", expanded=True):
-            cols = st.columns(4)
-            for i, item in enumerate(st.session_state.wardrobe):
-                with cols[i % 4]:
-                    crop_val = item.get("crop")
-                    image_val = item.get("image")
-                    
-                    display_path = None
-                    if crop_val and (COLOR_CROPS_DIR / crop_val).is_file():
-                        display_path = COLOR_CROPS_DIR / crop_val
-                    elif image_val and (PHOTOS_DIR / image_val).is_file():
-                        display_path = PHOTOS_DIR / image_val
-                    
-                    with st.container(border=True):
-                        if display_path:
-                            st.image(str(display_path), width=150)
-                            st.caption(f"**👕 {item.get('color', '')} {item.get('category', '').title()}**\n\nConfidence {item.get('confidence', 0)*100:.0f}%")
-                        else:
-                            st.write(f"Missing image: {image_val}")
+            tops = 0
+            bottoms = 0
+            trad = 0
+            foot = 0
+            others = 0
+            
+            for item in st.session_state.wardrobe:
+                cat = item.get('category', '').lower()
+                if any(t in cat for t in tops_cats): tops += 1
+                elif any(t in cat for t in bottoms_cats): bottoms += 1
+                elif any(t in cat for t in trad_cats): trad += 1
+                elif any(t in cat for t in footwear_cats): foot += 1
+                else: others += 1
+                
+            m1, m2, m3, m4 = st.columns(4)
+            m1.metric("👕 Tops", tops)
+            m2.metric("👖 Bottoms", bottoms)
+            m3.metric("🥻 Traditional", trad)
+            m4.metric("👟 Footwear", foot)
+            
+            st.markdown("---")
+            with st.expander("🖼️ View Visual Gallery (YOLO Detections)", expanded=True):
+                cols = st.columns(4)
+                for i, item in enumerate(st.session_state.wardrobe):
+                    with cols[i % 4]:
+                        crop_val = item.get("crop")
+                        image_val = item.get("image")
+                        
+                        display_path = None
+                        # 1. Try the YOLO crop in color_crops dir
+                        if crop_val and (COLOR_CROPS_DIR / crop_val).is_file():
+                            display_path = COLOR_CROPS_DIR / crop_val
+                        # 2. Fall back to original photo
+                        elif image_val and (PHOTOS_DIR / image_val).is_file():
+                            display_path = PHOTOS_DIR / image_val
+                        # 3. Try crop name as original photo too
+                        elif crop_val and (PHOTOS_DIR / crop_val).is_file():
+                            display_path = PHOTOS_DIR / crop_val
+                        
+                        with st.container(border=True):
+                            if display_path:
+                                st.image(str(display_path), width=150)
+                                st.caption(f"**👕 {item.get('color', '')} {item.get('category', '').title()}**\n\nConfidence {item.get('confidence', 0)*100:.0f}%")
+                            else:
+                                st.markdown(f"**👕 {item.get('color', '')} {item.get('category', '').title()}**")
+                                st.caption(f"Confidence {item.get('confidence', 0)*100:.0f}%")
     else:
         st.info("Run the Analysis in the Overview tab first.")
+
 
 with tab3:
     if "rec_data" in st.session_state and st.session_state.rec_data is not None:
