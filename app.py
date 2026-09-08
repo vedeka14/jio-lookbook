@@ -536,7 +536,12 @@ with tab1:
             st.code(json.dumps(st.session_state.rec_data['ajio_query'], indent=2), language="json")
 
 with tab2:
-    if "wardrobe" in st.session_state and st.session_state.wardrobe is not None:
+    # The dataset gallery is useful on its own, so make it available as soon as
+    # the Wardrobe tab opens instead of requiring the Overview workflow first.
+    if st.session_state.wardrobe is None:
+        st.session_state.wardrobe = load_yolo_dataset_samples()
+
+    if st.session_state.wardrobe is not None:
         if len(st.session_state.wardrobe) == 0:
             st.warning("Your wardrobe is empty! Upload some photos or use the default sample wardrobe.")
         else:
@@ -601,7 +606,7 @@ with tab2:
                                 st.markdown(f"**👕 {item.get('color', '')} {item.get('category', '').title()}**")
                                 st.caption(f"Confidence {item.get('confidence', 0)*100:.0f}%")
     else:
-        st.info("Run the Analysis in the Overview tab first.")
+        st.info("No wardrobe samples are available in this deployment.")
 
 
 with tab3:
