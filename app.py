@@ -409,11 +409,11 @@ with tab1:
             st.session_state.trip_context["activities"].append(f"Time: {dyn_context['time']}")
 
         # Step 3
-        progress_bar.progress(60, text="🤖 Running LLaVA Vision Model on wardrobe photos (Heavy Step)...")
+        progress_bar.progress(60, text="🤖 Running YOLO Object Detection on wardrobe photos (Heavy Step)...")
         status_box.markdown("✅ Context Ready\n\n⏳ Building Wardrobe...")
         
         if photos:
-            from fashion_ai.wardrobeinference.build_wardrobe_llava import build_wardrobe
+            from fashion_ai.wardrobeinference.build_wardrobe_yolo import build_wardrobe
             st.session_state.wardrobe = build_wardrobe(silent=True)
         elif use_default:
             import json
